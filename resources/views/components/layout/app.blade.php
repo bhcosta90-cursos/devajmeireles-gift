@@ -1,7 +1,8 @@
 <html>
 <head>
     <title>{{ $title ?? config('app.name') }}</title>
-    @vite(['resources/js/app.js', 'resources/css/app.css'])
+    <tallstackui:script />
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
     {{ $slot }}

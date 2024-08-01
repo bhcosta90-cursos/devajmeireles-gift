@@ -1,3 +1,3 @@
 <x-layout.app>
-    oi tudo bem
+    <x-ts-tag />
 </x-layout.app>
