@@ -4,18 +4,17 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin;
 
-use App\Livewire\Traits\Table;
+use App\Livewire\Traits\{Dialog, Table};
 use App\Models\Item;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\{Computed, On};
 use Livewire\Component;
-use TallStackUi\Traits\Interactions;
 
 class Items extends Component
 {
     use Table;
-    use Interactions;
+    use Dialog;
 
     public array $search = [
         'name' => [],
