@@ -6,4 +6,3 @@
     :count="$max"
     resize-auto
 />
-
