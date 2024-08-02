@@ -1,16 +1,20 @@
 <div>
-    <x-ui.slide.button label="Create Item">
+    <x-ui.slide label="Create Item">
         <div class="space-y-4">
-            <x-ui.select
-                wire:model="category"
-                label="Category"
-                :options="$this->categories"
-            />
+            <div class="grid grid-cols-2 gap-4">
+                <x-ui.select
+                    wire:model="category"
+                    label="Category"
+                    :options="$this->categories"
+                />
+                <x-ui.input type="url" label="Reference" wire:model="reference" />
+            </div>
             <x-ui.input label="Name" wire:model="name" />
-            <x-ui.input type="url" label="Reference" wire:model="reference" />
-            <x-ui.input label="Description" wire:model="description" />
-            <x-ui.input.currency label="Quantity" wire:model="quantity" />
-            <x-ui.input.number label="Price" wire:model="price" />
+            <x-ui.textarea max="200" label="Description" wire:model="description" />
+            <div class="grid grid-cols-2 gap-4">
+                <x-ui.input.currency label="Quantity" wire:model="quantity" />
+                <x-ui.input.number label="Price" wire:model="price" />
+            </div>
         </div>
-    </x-ui.slide.button>
+    </x-ui.slide>
 </div>
