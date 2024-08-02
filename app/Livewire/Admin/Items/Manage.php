@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Items;
 
+use App\Livewire\Traits\Dialog;
 use App\Models\{Category, Item};
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\{Computed, On, Rule};
@@ -11,6 +12,8 @@ use Livewire\Component;
 
 class Manage extends Component
 {
+    use Dialog;
+
     public bool $slide = false;
 
     public string $title = 'Create Item';
@@ -88,6 +91,8 @@ class Manage extends Component
 
         $this->reset();
         $this->dispatch('manage::list');
+
+        $this->notifySuccess();
 
         return $response;
     }

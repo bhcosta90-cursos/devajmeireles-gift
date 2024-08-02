@@ -19,7 +19,12 @@ trait Dialog
             ->send();
     }
 
-    protected function notify($message = 'Register deleted successfully'): void
+    protected function notifyDeleted($message = 'Register deleted successfully!'): void
+    {
+        $this->toast()->success(__($message))->send();
+    }
+
+    protected function notifySuccess($message = 'Register saved successfully!'): void
     {
         $this->toast()->success(__($message))->send();
     }

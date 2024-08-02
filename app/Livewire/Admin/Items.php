@@ -40,7 +40,7 @@ class Items extends Component
     {
         $item->delete();
         $this->dispatch('manage::list');
-        $this->notify();
+        $this->notifyDeleted();
     }
 
     #[Computed]
