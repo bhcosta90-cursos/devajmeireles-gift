@@ -1,1 +1,5 @@
-<x-ts-input {{ $attributes }} />
+@props([
+    'label' => null,
+])
+
+<x-ts-input :label="__($label)" {{ $attributes }} />
