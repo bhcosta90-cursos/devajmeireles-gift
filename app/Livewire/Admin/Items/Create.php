@@ -51,15 +51,17 @@ class Create extends Component
             ->toArray();
     }
 
+    public function updatedSlide(): void {
+        $this->resetExcept('slide');
+        $this->resetValidation();
+    }
+
     public function save(): Item {
         $data = $this->validate();
 
         $response = Item::create($data);
 
-        $this->slide = false;
         $this->reset();
-        $this->resetValidation();
-
         $this->dispatch('table::updated');
 
         return $response;
