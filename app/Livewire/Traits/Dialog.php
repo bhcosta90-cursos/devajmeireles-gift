@@ -19,8 +19,8 @@ trait Dialog
             ->send();
     }
 
-    protected function notifyDelete(): void
+    protected function notify($message = 'Register deleted successfully'): void
     {
-        $this->toast()->success(__('Register deleted successfully'))->send();
+        $this->toast()->success(__($message))->send();
     }
 }
