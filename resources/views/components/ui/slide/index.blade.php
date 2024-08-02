@@ -19,8 +19,8 @@
 
             <x-slot:footer start>
                 <div class="flex justify-between w-full">
-                    <x-ui.button secondary outline label="Cancel" />
-                    <x-ui.button type="submit" label="Save" />
+                    <x-ui.button.secondary outline label="Cancel" />
+                    <x-ui.button.primary type="submit" label="Save" />
                 </div>
             </x-slot:footer>
         </div>
