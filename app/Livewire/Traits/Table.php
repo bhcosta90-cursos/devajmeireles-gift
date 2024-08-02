@@ -31,7 +31,8 @@ trait Table
         }
     }
 
-    protected function deleteItem($params, $action = 'canDelete'): void{
+    protected function deleteItem($params, $action = 'canDelete'): void
+    {
         $this->dialog()
             ->question(__('Warning!'), __('Are you sure?'))
             ->confirm(__('Confirm'), $action, $params)
@@ -39,7 +40,8 @@ trait Table
             ->send();
     }
 
-    protected function notifyDelete(): void {
+    protected function notifyDelete(): void
+    {
         $this->toast()->success(__('Register deleted successfully'))->send();
     }
 }

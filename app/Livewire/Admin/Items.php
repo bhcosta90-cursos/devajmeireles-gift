@@ -32,11 +32,13 @@ class Items extends Component
         return view('livewire.admin.items');
     }
 
-    public function delete(Item $item): void{
+    public function delete(Item $item): void
+    {
         $this->deleteItem($item->id);
     }
 
-    public function canDelete(Item $item):void {
+    public function canDelete(Item $item): void
+    {
         $item->delete();
         $this->dispatch('manage::list');
         $this->notifyDelete();
