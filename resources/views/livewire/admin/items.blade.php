@@ -2,7 +2,9 @@
     <x-slot name="header">
         {{ __('Items') }}
     </x-slot>
-    <x-ts-tag wire:model.live="search.name" />
+
+    <x-ui.tag wire:model.live="search.name" label="Name"  />
+
     <x-ui.table :records="$this->records">
         <x-ui.table.thead>
             <x-ui.table.tr>
