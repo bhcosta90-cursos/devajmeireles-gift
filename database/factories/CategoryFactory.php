@@ -15,8 +15,6 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'created_at'  => Carbon::now(),
-            'updated_at'  => Carbon::now(),
             'name'        => $this->faker->text(15),
             'description' => $this->faker->text(),
         ];

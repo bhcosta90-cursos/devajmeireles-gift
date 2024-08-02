@@ -9,6 +9,7 @@ use App\Models\Item;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Items extends Component
@@ -31,6 +32,7 @@ class Items extends Component
     }
 
     #[Computed]
+    #[On('table::updated')]
     public function records(): Paginator
     {
         return Item::query()

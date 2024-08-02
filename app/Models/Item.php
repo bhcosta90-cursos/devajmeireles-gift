@@ -24,6 +24,7 @@ class Item extends Model
         'quantity',
         'is_active',
         'signed_at',
+        'price',
     ];
 
     public function category(): BelongsTo

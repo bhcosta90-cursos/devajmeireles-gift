@@ -14,9 +14,9 @@ return new class () extends Migration {
             $table->foreignId('category_id')->nullable();
             $table->string('name');
             $table->string('description')->nullable();
-            $table->string('reference');
+            $table->string('reference')->nullable();
             $table->unsignedInteger('quantity');
-            $table->timestamp('signed_at');
+            $table->timestamp('signed_at')->nullable();
             $table->unsignedBigInteger('price');
             $table->boolean('is_active')->default(true);
             $table->timestamps();

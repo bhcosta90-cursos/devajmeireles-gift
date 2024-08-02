@@ -1,5 +1,4 @@
 @props([
-    'type' => 'button',
     'primary' => false,
     'secondary' => false,
     'label' => null,
@@ -7,15 +6,17 @@
     'sm' => false,
     'md' => false,
     'lg' => false,
+    'outline' => false,
 ])
 <div>
     <x-ts-button
-        {{ $attributes->merge($sm ? ['sm' => true] : []) }}
+        {{ $attributes }}
         :xs="$xs"
         :sm="$sm"
         :md="$md"
         :lg="$lg"
-        :color="$primary ? 'primary' : 'secondary'"
+        :outline="$outline"
+        :color="$secondary ? 'secondary' : 'primary'"
     >
         {{ __($label) ?? $slot}}
     </x-ts-button>

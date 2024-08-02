@@ -15,14 +15,9 @@ class ItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'created_at'  => Carbon::now(),
-            'updated_at'  => Carbon::now(),
-            'name'        => $this->faker->text(15),
-            'description' => $this->faker->sentence(),
-            'reference'   => $this->faker->word(),
-            'quantity'    => $this->faker->numberBetween(10, 50),
-            'signed_at'   => Carbon::now(),
             'category_id' => Category::factory(),
+            'name'        => $this->faker->text(15),
+            'quantity'    => $this->faker->numberBetween(10, 50),
             'price'       => $this->faker->numberBetween(500, 5000) / 100,
         ];
     }

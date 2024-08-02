@@ -8,7 +8,7 @@
             <div class="flex-grow">
                 <x-ui.tag wire:model.live="search.name" label="Name"  />
             </div>
-            <x-ui.button secondary label="Add Item" />
+            <livewire:admin.items.create />
         </div>
 
         <x-ui.table :records="$this->records">
