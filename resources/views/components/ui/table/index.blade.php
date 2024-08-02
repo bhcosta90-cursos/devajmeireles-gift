@@ -6,7 +6,7 @@
     <table class="min-w-full divide-y divide-gray-300">
         {{ $slot }}
     </table>
-    @if($records instanceof Paginator)
+    @if($records instanceof Paginator && $records->hasMorePages())
         <div class="p-3 bg-gray-50 border-t border-t-gray-300">
             {!! $records->links() !!}
         </div>

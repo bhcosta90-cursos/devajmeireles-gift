@@ -4,11 +4,23 @@ declare(strict_types = 1);
 
 namespace App\Models\Trait;
 
+use JetBrains\PhpStorm\NoReturn;
+
 trait Search
 {
-    public function scopeSearch($query, array $search): void
+    #[NoReturn]
+    public function scopeSearch($query, array $search, string|array|null $field = null): void
     {
-        $keys = array_keys($search);
+        if($field !== null && !is_array($field)) {
+                $field = [$field];
+        }
+
+        $table = with(new static)->getTable();
+
+        $keys = collect(array_keys($search))
+            ->filter(fn($key) => ($field && in_array($key, $field, true)) || $field === null)
+            ->map(fn($key) => "{$table}.{$key}")
+            ->toArray();
 
         $newValues = [];
 

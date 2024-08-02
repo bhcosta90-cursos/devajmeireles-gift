@@ -14,7 +14,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('items', Livewire\Admin\Items::class);
+    Route::get('items', Livewire\Admin\Items::class)->name('items');
 });
 
 Route::middleware('auth')->group(function () {

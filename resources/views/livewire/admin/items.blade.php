@@ -4,7 +4,12 @@
     </x-slot>
 
     <div class="space-y-4">
-        <x-ui.tag wire:model.live="search.name" label="Name"  />
+        <div class="flex justify-between items-end gap-8">
+            <div class="flex-grow">
+                <x-ui.tag wire:model.live="search.name" label="Name"  />
+            </div>
+            <x-ui.button secondary label="Add Item" />
+        </div>
 
         <x-ui.table :records="$this->records">
             <x-ui.table.thead>
