@@ -34,7 +34,10 @@
                                 @click="$dispatch('manager::edit', {item: {{ $record->id }}})"
                                 type="edit"
                             />
-                            <x-ui.action.danger type="delete" />
+                            <x-ui.action.danger
+                                type="delete"
+                                wire:click="delete({{ $record->id }})"
+                            />
                         </x-ui.table.td>
                     </x-ui.table.tr>
                 @endforeach

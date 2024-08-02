@@ -10,10 +10,12 @@ use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\{Computed, On};
 use Livewire\Component;
+use TallStackUi\Traits\Interactions;
 
 class Items extends Component
 {
     use Table;
+    use Interactions;
 
     public array $search = [
         'name' => [],
@@ -28,6 +30,16 @@ class Items extends Component
     public function render(): View
     {
         return view('livewire.admin.items');
+    }
+
+    public function delete(Item $item): void{
+        $this->deleteItem($item->id);
+    }
+
+    public function canDelete(Item $item):void {
+        $item->delete();
+        $this->dispatch('manage::list');
+        $this->notifyDelete();
     }
 
     #[Computed]

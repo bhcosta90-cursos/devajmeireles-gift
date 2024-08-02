@@ -2,4 +2,4 @@
     'type',
 ])
 
-<x-ui.action :$type outline color="red" />
+<x-ui.action :$type outline color="red" {{ $attributes }} />
