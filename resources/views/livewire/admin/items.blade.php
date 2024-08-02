@@ -8,7 +8,7 @@
             <div class="flex-grow">
                 <x-ui.tag wire:model.live="search.name" label="Name"  />
             </div>
-            <livewire:admin.items.create />
+            <livewire:admin.items.manage />
         </div>
 
         <x-ui.table :records="$this->records">
@@ -18,7 +18,7 @@
                     <x-ui.table.th column="name" :$sortDirection :$sortColumn>Item Name</x-ui.table.th>
                     <x-ui.table.th column="price" :$sortDirection :$sortColumn>Item Price</x-ui.table.th>
                     <x-ui.table.th>Item Quantity</x-ui.table.th>
-                    <x-ui.table.th>Actions</x-ui.table.th>
+                    <x-ui.table.th class="w-0 text-right">Actions</x-ui.table.th>
                 </x-ui.table.tr>
             </x-ui.table.thead>
 
@@ -30,7 +30,11 @@
                         <x-ui.table.td>{{ currency($record->price) }}</x-ui.table.td>
                         <x-ui.table.td>{{ $record->quantity }}</x-ui.table.td>
                         <x-ui.table.td>
-
+                            <x-ui.action.edit
+                                @click="$dispatch('manager::edit', {item: {{ $record->id }}})"
+                                type="edit"
+                            />
+                            <x-ui.action.danger type="delete" />
                         </x-ui.table.td>
                     </x-ui.table.tr>
                 @endforeach

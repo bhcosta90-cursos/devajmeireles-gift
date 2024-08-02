@@ -1,19 +1,21 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Items;
 
-use App\Models\Category;
-use App\Models\Item;
+use App\Models\{Category, Item};
 use Illuminate\Contracts\View\View;
-use Livewire\Attributes\Computed;
-use Livewire\Attributes\Rule;
+use Livewire\Attributes\{Computed, On, Rule};
 use Livewire\Component;
 
-class Create extends Component
+class Manage extends Component
 {
     public bool $slide = false;
+
+    public string $title = 'Create Item';
+
+    public ?Item $item = null;
 
     #[Rule(['required'])]
     public ?int $category = null;
@@ -35,11 +37,12 @@ class Create extends Component
 
     public function render(): View
     {
-        return view('livewire.admin.items.create');
+        return view('livewire.admin.items.manage');
     }
 
     #[Computed]
-    public function categories(): array {
+    public function categories(): array
+    {
         return Category::query()
             ->get()
             ->map(function (Category $category) {
@@ -51,18 +54,40 @@ class Create extends Component
             ->toArray();
     }
 
-    public function updatedSlide(): void {
+    public function updatedSlide(): void
+    {
         $this->resetExcept('slide');
         $this->resetValidation();
     }
 
-    public function save(): Item {
-        $data = $this->validate();
+    #[On('manager::edit')]
+    public function load(Item $item): void
+    {
+        $this->item = $item;
 
-        $response = Item::create($data);
+        $this->name        = $item->name;
+        $this->category    = $item->category_id;
+        $this->description = $item->description;
+        $this->reference   = $item->reference;
+        $this->quantity    = $item->quantity;
+        $this->price       = $item->price;
+
+        $this->slide = true;
+        $this->title = 'Edit Item';
+    }
+
+    public function save(): Item | bool
+    {
+        $data = $this->validate() + [
+            'category_id' => $this->category,
+        ];
+
+        $response = $this->item
+            ? $this->item->update($data)
+            : Item::create($data);
 
         $this->reset();
-        $this->dispatch('table::updated');
+        $this->dispatch('manage::list');
 
         return $response;
     }

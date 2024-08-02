@@ -9,17 +9,17 @@ use JetBrains\PhpStorm\NoReturn;
 trait Search
 {
     #[NoReturn]
-    public function scopeSearch($query, array $search, string|array|null $field = null): void
+    public function scopeSearch($query, array $search, string | array | null $field = null): void
     {
-        if($field !== null && !is_array($field)) {
-                $field = [$field];
+        if ($field !== null && !is_array($field)) {
+            $field = [$field];
         }
 
-        $table = with(new static)->getTable();
+        $table = with(new static())->getTable();
 
         $keys = collect(array_keys($search))
-            ->filter(fn($key) => ($field && in_array($key, $field, true)) || $field === null)
-            ->map(fn($key) => "{$table}.{$key}")
+            ->filter(fn ($key) => ($field && in_array($key, $field, true)) || $field === null)
+            ->map(fn ($key) => "{$table}.{$key}")
             ->toArray();
 
         $newValues = [];
