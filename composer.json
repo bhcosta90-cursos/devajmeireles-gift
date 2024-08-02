@@ -13,14 +13,19 @@
         "tallstackui/tallstackui": "^1.33"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.13",
         "fakerphp/faker": "^1.23",
+        "larastan/larastan": "^2.9",
         "laravel/breeze": "^2.1",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
         "pestphp/pest": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.0"
+        "pestphp/pest-plugin-faker": "^2.0",
+        "pestphp/pest-plugin-laravel": "^2.4",
+        "pestphp/pest-plugin-livewire": "^2.1",
+        "pestphp/pest-plugin-type-coverage": "^2.8"
     },
     "autoload": {
         "psr-4": {
@@ -52,7 +57,14 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
-        ]
+        ],
+        "test": [
+            "./vendor/bin/phpstan analyse --memory-limit=2G",
+            "./vendor/bin/pint --test",
+            "./vendor/bin/pest --type-coverage --memory-limit=2G",
+            "composer run test:parallel"
+        ],
+        "test:parallel": "./vendor/bin/pest --parallel --processes=10"
     },
     "extra": {
         "laravel": {

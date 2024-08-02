@@ -1,17 +1,19 @@
 <?php
 
-use App\Livewire;
+declare(strict_types = 1);
+
 use App\Http\Controllers\ProfileController;
+use App\Livewire;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 Route::get('/tall-stack-ui', Livewire\TallStack::class);
 
-Route::middleware(['auth', 'verified'])->group(function(){
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    
+
     Route::get('items', Livewire\Admin\Items::class);
 });
 
@@ -21,4 +23,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

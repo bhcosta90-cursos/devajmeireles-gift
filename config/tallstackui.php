@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use TallStackUi\View\Components;
 
 return [
@@ -104,9 +106,9 @@ return [
         | persistent: enables the dialog to not be closed by clicking outside by default.
         */
         'dialog' => [
-            'z-index' => 'z-50',
-            'overflow' => false,
-            'blur' => false,
+            'z-index'    => 'z-50',
+            'overflow'   => false,
+            'blur'       => false,
             'persistent' => false,
         ],
         /*
@@ -122,12 +124,12 @@ return [
         | center: controls if the modal is centered by default.
         */
         'modal' => [
-            'z-index' => 'z-50',
-            'overflow' => false,
-            'blur' => false,
+            'z-index'    => 'z-50',
+            'overflow'   => false,
+            'blur'       => false,
             'persistent' => false,
-            'size' => '2xl',
-            'center' => false,
+            'size'       => '2xl',
+            'center'     => false,
         ],
         /*
         |----------------------------------------------------------------------
@@ -140,10 +142,10 @@ return [
         | opacity: enables the background opacity by default.
         */
         'loading' => [
-            'z-index' => 'z-50',
+            'z-index'  => 'z-50',
             'overflow' => false,
-            'blur' => false,
-            'opacity' => true,
+            'blur'     => false,
+            'opacity'  => true,
         ],
         /*
         |----------------------------------------------------------------------
@@ -158,12 +160,12 @@ return [
         | position: controls the default slide position (Allowed: right, left).
         */
         'slide' => [
-            'z-index' => 'z-50',
-            'overflow' => false,
-            'blur' => false,
+            'z-index'    => 'z-50',
+            'overflow'   => false,
+            'blur'       => false,
             'persistent' => false,
-            'size' => 'lg',
-            'position' => 'right',
+            'size'       => 'lg',
+            'position'   => 'right',
         ],
         /*
         |----------------------------------------------------------------------
@@ -177,11 +179,11 @@ return [
         | timeout: controls the default timeout in seconds.
         */
         'toast' => [
-            'z-index' => 'z-50',
-            'progress' => true,
+            'z-index'    => 'z-50',
+            'progress'   => true,
             'expandable' => false,
-            'position' => 'top-right',
-            'timeout' => 3,
+            'position'   => 'top-right',
+            'timeout'    => 3,
         ],
     ],
 
@@ -193,58 +195,58 @@ return [
     | List of all TallStackUI components.
     */
     'components' => [
-        'alert' => Components\Alert::class,
-        'avatar' => Components\Avatar::class,
-        'badge' => Components\Badge::class,
-        'banner' => Components\Banner::class,
-        'boolean' => Components\Boolean::class,
-        'button' => Components\Button\Button::class,
-        'button.circle' => Components\Button\Circle::class,
-        'card' => Components\Card::class,
-        'checkbox' => Components\Form\Checkbox::class,
-        'color' => Components\Form\Color::class,
-        'clipboard' => Components\Clipboard::class,
-        'date' => Components\Form\Date::class,
-        'dialog' => Components\Interaction\Dialog::class,
-        'dropdown' => Components\Dropdown\Dropdown::class,
-        'dropdown.items' => Components\Dropdown\Items::class,
-        'error' => Components\Form\Error::class,
-        'errors' => Components\Errors::class,
-        'floating' => Components\Floating::class,
-        'upload' => Components\Form\Upload::class,
-        'hint' => Components\Form\Hint::class,
-        'icon' => Components\Icon::class,
-        'input' => Components\Form\Input::class,
-        'label' => Components\Form\Label::class,
-        'link' => Components\Link::class,
-        'loading' => Components\Loading::class,
-        'modal' => Components\Modal::class,
-        'number' => Components\Form\Number::class,
-        'password' => Components\Form\Password::class,
-        'pin' => Components\Form\Pin::class,
-        'progress' => Components\Progress\Progress::class,
+        'alert'           => Components\Alert::class,
+        'avatar'          => Components\Avatar::class,
+        'badge'           => Components\Badge::class,
+        'banner'          => Components\Banner::class,
+        'boolean'         => Components\Boolean::class,
+        'button'          => Components\Button\Button::class,
+        'button.circle'   => Components\Button\Circle::class,
+        'card'            => Components\Card::class,
+        'checkbox'        => Components\Form\Checkbox::class,
+        'color'           => Components\Form\Color::class,
+        'clipboard'       => Components\Clipboard::class,
+        'date'            => Components\Form\Date::class,
+        'dialog'          => Components\Interaction\Dialog::class,
+        'dropdown'        => Components\Dropdown\Dropdown::class,
+        'dropdown.items'  => Components\Dropdown\Items::class,
+        'error'           => Components\Form\Error::class,
+        'errors'          => Components\Errors::class,
+        'floating'        => Components\Floating::class,
+        'upload'          => Components\Form\Upload::class,
+        'hint'            => Components\Form\Hint::class,
+        'icon'            => Components\Icon::class,
+        'input'           => Components\Form\Input::class,
+        'label'           => Components\Form\Label::class,
+        'link'            => Components\Link::class,
+        'loading'         => Components\Loading::class,
+        'modal'           => Components\Modal::class,
+        'number'          => Components\Form\Number::class,
+        'password'        => Components\Form\Password::class,
+        'pin'             => Components\Form\Pin::class,
+        'progress'        => Components\Progress\Progress::class,
         'progress.circle' => Components\Progress\Circle::class,
-        'radio' => Components\Form\Radio::class,
-        'range' => Components\Form\Range::class,
-        'rating' => Components\Rating::class,
-        'select.native' => Components\Select\Native::class,
-        'select.styled' => Components\Select\Styled::class,
-        'slide' => Components\Slide::class,
-        'stats' => Components\Stats::class,
-        'step' => Components\Step\Step::class,
-        'step.items' => Components\Step\Items::class,
-        'tab' => Components\Tab\Tab::class,
-        'tag' => Components\Form\Tag::class,
-        'table' => Components\Table::class,
-        'tab.items' => Components\Tab\Items::class,
-        'textarea' => Components\Form\Textarea::class,
-        'theme-switch' => Components\ThemeSwitch::class,
-        'time' => Components\Form\Time::class,
-        'toast' => Components\Interaction\Toast::class,
-        'toggle' => Components\Form\Toggle::class,
-        'tooltip' => Components\Tooltip::class,
-        'reaction' => Components\Reaction::class,
-        'wrapper.input' => Components\Wrapper\Input::class,
-        'wrapper.radio' => Components\Wrapper\Radio::class,
+        'radio'           => Components\Form\Radio::class,
+        'range'           => Components\Form\Range::class,
+        'rating'          => Components\Rating::class,
+        'select.native'   => Components\Select\Native::class,
+        'select.styled'   => Components\Select\Styled::class,
+        'slide'           => Components\Slide::class,
+        'stats'           => Components\Stats::class,
+        'step'            => Components\Step\Step::class,
+        'step.items'      => Components\Step\Items::class,
+        'tab'             => Components\Tab\Tab::class,
+        'tag'             => Components\Form\Tag::class,
+        'table'           => Components\Table::class,
+        'tab.items'       => Components\Tab\Items::class,
+        'textarea'        => Components\Form\Textarea::class,
+        'theme-switch'    => Components\ThemeSwitch::class,
+        'time'            => Components\Form\Time::class,
+        'toast'           => Components\Interaction\Toast::class,
+        'toggle'          => Components\Form\Toggle::class,
+        'tooltip'         => Components\Tooltip::class,
+        'reaction'        => Components\Reaction::class,
+        'wrapper.input'   => Components\Wrapper\Input::class,
+        'wrapper.radio'   => Components\Wrapper\Radio::class,
     ],
 ];
