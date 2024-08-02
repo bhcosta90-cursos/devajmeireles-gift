@@ -34,7 +34,8 @@ class Items extends Component
     public function records(): Paginator
     {
         return Item::query()
+            ->search($this->search)
             ->orderBy($this->sortColumn, $this->sortDirection)
-            ->simplePaginate();
+            ->simplePaginate(perPage: $this->quantity);
     }
 }

@@ -8,6 +8,7 @@
         "php": "^8.2",
         "blade-ui-kit/blade-heroicons": "^2.4",
         "laravel/framework": "^11.9",
+        "laravel/telescope": "^5.1",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "tallstackui/tallstackui": "^1.33"
@@ -68,7 +69,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "laravel/telescope"
+            ]
         }
     },
     "config": {

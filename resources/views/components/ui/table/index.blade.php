@@ -7,7 +7,7 @@
         {{ $slot }}
     </table>
     @if($records instanceof Paginator)
-        <div class="p-3">
+        <div class="p-3 bg-gray-50 border-t border-t-gray-300">
             {!! $records->links() !!}
         </div>
     @endif
