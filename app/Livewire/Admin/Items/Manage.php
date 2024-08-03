@@ -7,7 +7,8 @@ namespace App\Livewire\Admin\Items;
 use App\Livewire\Traits\Dialog;
 use App\Models\{Category, Item};
 use Illuminate\Contracts\View\View;
-use Livewire\Attributes\{Computed, On, Rule};
+use Illuminate\Validation\Rule;
+use Livewire\Attributes\{Computed, On};
 use Livewire\Component;
 
 class Manage extends Component
@@ -20,22 +21,16 @@ class Manage extends Component
 
     public ?Item $item = null;
 
-    #[Rule(['required'])]
     public ?int $category = null;
 
-    #[Rule(['required', 'string', 'min:2', 'max:255'])]
     public ?string $name = null;
 
-    #[Rule(['nullable', 'string', 'max:255'])]
     public ?string $description = null;
 
-    #[Rule(['nullable', 'url', 'max:255'])]
     public ?string $reference = null;
 
-    #[Rule(['required', 'integer', 'min:0'])]
     public ?int $quantity = null;
 
-    #[Rule(['required', 'numeric', 'min:0'])]
     public ?float $price = null;
 
     public function render(): View
@@ -95,5 +90,17 @@ class Manage extends Component
         $this->notifySuccess();
 
         return $response;
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'category'    => ['required', Rule::exists('categories', 'id')],
+            'name'        => ['required', 'string', 'min:2', 'max:255'],
+            'description' => ['nullable', 'string', 'max:255'],
+            'reference'   => ['nullable', 'url', 'max:255'],
+            'quantity'    => ['required', 'integer', 'min:0'],
+            'price'       => ['required', 'numeric', 'min:0'],
+        ];
     }
 }

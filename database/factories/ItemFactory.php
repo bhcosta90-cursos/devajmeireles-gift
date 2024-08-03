@@ -15,10 +15,9 @@ class ItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'category_id' => Category::factory(),
-            'name'        => $this->faker->text(15),
-            'quantity'    => $this->faker->numberBetween(10, 50),
-            'price'       => $this->faker->numberBetween(500, 5000) / 100,
+            'name'     => $this->faker->text(15),
+            'quantity' => $this->faker->numberBetween(10, 50),
+            'price'    => $this->faker->numberBetween(500, 5000) / 100,
         ];
     }
 
@@ -33,6 +32,13 @@ class ItemFactory extends Factory
     {
         return $this->state(fn () => [
             'signed_at' => $carbon ?? $this->faker->dateTimeBetween('-1 year', 'now'),
+        ]);
+    }
+
+    public function withCategory(?Category $category = null): self
+    {
+        return $this->state(fn () => [
+            'category_id' => $category ?: Category::factory()->create()->id,
         ]);
     }
 }
