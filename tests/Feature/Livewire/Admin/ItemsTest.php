@@ -20,20 +20,26 @@ describe('has livewire - admin - items page', function () {
     });
 
     it('can list items with correct names and categories', function () {
-        $category  = Category::factory()->create(['name' => 'Category 1']);
-        $category2 = Category::factory()->create(['name' => 'Category 2']);
+        Category::insert(Category::factory(2)
+            ->sequence(fn (Sequence $sequence) => ['name' => "Category {$sequence->index}"])
+            ->make()
+            ->toArray());
 
-        Item::factory()
+        Item::insert(Item::factory()
             ->count(30)
-            ->for($category)
             ->sequence(fn (Sequence $sequence) => ['name' => "Item {$sequence->index}"])
-            ->create();
+            ->make([
+                'category_id' => 1,
+            ])
+            ->toArray());
 
-        Item::factory()
+        Item::insert(Item::factory()
             ->count(5)
-            ->for($category2)
             ->sequence(fn (Sequence $sequence) => ['name' => "Item Category {$sequence->index}"])
-            ->create();
+            ->make([
+                'category_id' => 2,
+            ])
+            ->toArray());
 
         livewire(Items::class)
             ->set('sortColumn', 'items.id')
@@ -46,8 +52,9 @@ describe('has livewire - admin - items page', function () {
             ->assertSee('Item 11')
             ->assertDontSee('Item 21')
             ->assertDontSee('Item 0')
-            ->set('search', ['category' => ['Category 2']])
+            ->set('search', ['category' => ['Category 1']])
             ->assertSee('Item Category 0')
-            ->assertDontSee('Item 0');
+            ->assertDontSee('Item 0')
+            ->assertSuccessful();
     });
 });
