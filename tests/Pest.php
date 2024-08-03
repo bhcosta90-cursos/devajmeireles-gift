@@ -2,6 +2,7 @@
 
 declare(strict_types = 1);
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -44,7 +45,24 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function mockAuthentication(bool $createdUser = false): User
 {
-    // ..
+    $user = User::factory()->make();
+
+    if ($createdUser) {
+        $user->save();
+    }
+
+    // Mock do guard e da autenticação
+    $guard = Mockery::mock('Illuminate\Contracts\Auth\Guard');
+    $guard->shouldReceive('check')->andReturn(true);
+    $guard->shouldReceive('user')->andReturn($user);
+
+    // Mock do facade Auth para usar o guard mockado
+    Auth::shouldReceive('guard')->andReturn($guard);
+    Auth::shouldReceive('shouldUse')->andReturnSelf();
+    Auth::shouldReceive('userResolver')->andReturn(fn () => $user);
+    Auth::shouldReceive('user')->andReturn($user);
+
+    return $user;
 }

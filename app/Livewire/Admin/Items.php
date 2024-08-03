@@ -23,7 +23,7 @@ class Items extends Component
 
     public function mount(): void
     {
-        $this->sortColumn    = 'name';
+        $this->sortColumn    = 'items.name';
         $this->sortDirection = 'asc';
     }
 

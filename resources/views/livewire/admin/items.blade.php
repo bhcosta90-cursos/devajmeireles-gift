@@ -17,9 +17,9 @@
         <x-ui.table :records="$this->records">
             <x-ui.table.thead>
                 <x-ui.table.tr>
-                    <x-ui.table.th column="id" :$sortDirection :$sortColumn first label="#" />
-                    <x-ui.table.th column="name" :$sortDirection :$sortColumn label="Category" />
-                    <x-ui.table.th column="name" :$sortDirection :$sortColumn label="Item Name" />
+                    <x-ui.table.th column="items.id" :$sortDirection :$sortColumn first label="#" />
+                    <x-ui.table.th column="categories.name" :$sortDirection :$sortColumn label="Category" />
+                    <x-ui.table.th column="items.name" :$sortDirection :$sortColumn label="Item Name" />
                     <x-ui.table.th class="w-0" column="price" :$sortDirection :$sortColumn label="Item Price" />
                     <x-ui.table.th class="w-0" label="Item Quantity" />
                     <x-ui.table.th class="w-0" label="Active" />
