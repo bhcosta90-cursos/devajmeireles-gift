@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Admin\Traits\Model;
+namespace App\Livewire\Traits\Model;
 
 use App\Models\Category as ModelCategory;
 

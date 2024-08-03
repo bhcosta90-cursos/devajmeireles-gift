@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Admin\Traits;
+namespace App\Livewire\Traits;
 
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;

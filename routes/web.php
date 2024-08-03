@@ -7,7 +7,6 @@ use App\Livewire;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
-Route::get('/tall-stack-ui', Livewire\TallStack::class);
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
