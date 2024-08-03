@@ -4,8 +4,8 @@
 ])
 
 <x-ts-badge
-    :text="__($label ?: ($value ? 'Yes' : 'No'))"
-    :color="$value ? 'green': 'red'"
+    :text="__($label ?: ($value ? 'Yes' : ($value === null ? '-' : 'No')))"
+    :color="$value ? 'green': ($value === null ? 'neutral' : 'red')"
     outline
 />
 

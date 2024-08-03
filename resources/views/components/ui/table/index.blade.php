@@ -16,9 +16,9 @@
             </tfoot>
         @endif
     </table>
-    @if($records instanceof Paginator && $records->hasMorePages())
+    @if($records instanceof Paginator && ($records->hasMorePages() || $records->currentPage() > 1))
         <div class="p-3 bg-gray-50 border-t border-t-gray-300">
-            {!! $records->links() !!}
+            <x-ui.pagination :$records/>
         </div>
     @endif
 </div>

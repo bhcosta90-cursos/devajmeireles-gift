@@ -16,6 +16,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('admin')->as('admin.')->group(function () {
         Route::get('items', Livewire\Admin\Items::class)->name('items');
         Route::get('categories', Livewire\Admin\Categories::class)->name('categories');
+        Route::get('signatures', Livewire\Admin\Signatures::class)->name('signatures');
     });
 });
 

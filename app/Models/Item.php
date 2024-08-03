@@ -6,9 +6,9 @@ namespace App\Models;
 
 use App\Casts\FloatToIntCast;
 use App\Models\Trait\Search;
-use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 
 class Item extends Model
 {
