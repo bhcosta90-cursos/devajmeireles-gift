@@ -97,4 +97,3 @@ Testable::macro('assertConfirmation', function (mixed $params, string $action) {
 
     return $this;
 });
-
