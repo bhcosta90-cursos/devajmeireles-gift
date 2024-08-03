@@ -17,7 +17,8 @@ class Items extends Component
     use Dialog;
 
     public array $search = [
-        'name' => [],
+        'name'     => [],
+        'category' => [],
     ];
 
     public function mount(): void
@@ -48,7 +49,18 @@ class Items extends Component
     public function records(): Paginator
     {
         return Item::query()
-            ->search($this->search)
+            ->select([
+                'items.id',
+                'items.name',
+                'items.price',
+                'items.quantity',
+                'categories.name as category_name',
+            ])
+            ->join('categories', 'categories.id', '=', 'items.category_id')
+            ->search([
+                'items.name'      => $this->search['name'],
+                'categories.name' => $this->search['category'],
+            ])
             ->orderBy($this->sortColumn, $this->sortDirection)
             ->simplePaginate(perPage: $this->quantity);
     }

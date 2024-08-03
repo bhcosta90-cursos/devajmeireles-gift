@@ -16,7 +16,7 @@
         @endif
     >
 
-        {{ $label ?? $slot }}
+        {{ __($label) ?? $slot }}
         <span class="ml-2 flex-none rounded">
 
             @if ($sortColumn === $column && $sortDirection === 'asc')

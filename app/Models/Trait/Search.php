@@ -15,11 +15,8 @@ trait Search
             $field = [$field];
         }
 
-        $table = with(new static())->getTable();
-
         $keys = collect(array_keys($search))
             ->filter(fn ($key) => ($field && in_array($key, $field, true)) || $field === null)
-            ->map(fn ($key) => "{$table}.{$key}")
             ->toArray();
 
         $newValues = [];
@@ -33,7 +30,7 @@ trait Search
         if ($newValues) {
             $query->where(function ($query) use ($keys, $newValues) {
                 foreach ($newValues as $value) {
-                    $query->orWhereAny($keys, 'like', "%{$value}%");
+                    $query->whereAny($keys, 'like', "%{$value}%");
                 }
             });
         }
