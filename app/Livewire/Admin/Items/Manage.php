@@ -101,8 +101,16 @@ class Manage extends Component
     protected function rules(): array
     {
         return [
-            'category'    => ['required', Rule::exists('categories', 'id')],
-            'name'        => ['required', 'string', 'min:2', 'max:255'],
+            'category' => ['required', Rule::exists('categories', 'id')],
+            'name'     => [
+                'required',
+                'string',
+                'min:2',
+                'max:255',
+                Rule::unique('items', 'name')
+                    ->whereNull('deleted_at')
+                    ->ignore($this->item),
+            ],
             'description' => ['nullable', 'string', 'max:255'],
             'reference'   => ['nullable', 'url', 'max:255'],
             'quantity'    => ['required', 'integer', 'min:0'],

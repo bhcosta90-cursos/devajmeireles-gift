@@ -15,7 +15,7 @@ class ItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'     => $this->faker->text(15),
+            'name'     => substr($this->faker->text(15), 0, -1),
             'quantity' => $this->faker->numberBetween(10, 50),
             'price'    => $this->faker->numberBetween(500, 5000) / 100,
         ];

@@ -20,6 +20,6 @@ class ItemSeeder extends Seeder
                 $item->category_id = fake()->randomElement($categories);
             });
 
-        Item::insert($items->toArray());
+        Item::upsert($items->toArray(), uniqueBy: ['name']);
     }
 }

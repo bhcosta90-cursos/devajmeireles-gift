@@ -15,6 +15,8 @@ describe('has livewire - admin - items - manage -> page', function () {
     beforeEach(fn () => mockAuthentication());
 
     it('validates item fields correctly', function () {
+        $item = Item::factory()->create();
+
         $data = [
             ValidateData::make()
                 ->field('category', '', 'required')
@@ -33,6 +35,9 @@ describe('has livewire - admin - items - manage -> page', function () {
             ValidateData::make()
                 ->field('name', str_repeat('a', 256), 'max:255')
                 ->field('description', str_repeat('a', 256), 'max:255')
+                ->run(),
+            ValidateData::make()
+                ->field('name', $item->name, 'unique')
                 ->run(),
         ];
 

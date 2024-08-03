@@ -12,7 +12,7 @@ return new class () extends Migration {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->nullable();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('description')->nullable();
             $table->string('reference')->nullable();
             $table->unsignedInteger('quantity');
