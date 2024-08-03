@@ -31,6 +31,15 @@ class Filter extends Component
         return view('livewire.signatures.filter');
     }
 
+    public function removeFilters(): void
+    {
+
+        $this->dispatch('filter::advanced', $this->search = collect($this->search)
+            ->map(fn () => [])
+            ->merge(['created_at' => $this->search['created_at']])
+            ->toArray());
+    }
+
     public function updatedSearch(): void
     {
         $this->dispatch('filter::advanced', $this->search);

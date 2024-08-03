@@ -8,7 +8,7 @@
             <div class="flex justify-end">
                 <livewire:signatures.filter />
             </div>
-            <x-ui.tag wire:model.live="search.name" placeholder="Search by name"  />
+            <x-ui.tag wire:model.live="search.name" placeholder="Search by subscription name"  />
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -28,7 +28,7 @@
                                         (#{{ $signature->id }}) {{ str($signature->name)->limit(24) }}
                                     </h3>
                                     <p class="text-sm text-gray-500">
-                                        <a href="#">{{ $signature->item->name }}</a>
+                                        <a href="#">{{ $signature->item_name }}</a>
                                     </p>
                                     <x-ui.badge outline primary>
                                         {{ $signature->created_at->format('d/m/Y H:i') }}

@@ -39,12 +39,12 @@ class Signatures extends Component
         return Signature::query()
             ->select([
                 'signatures.*',
+                'items.name as item_name',
             ])
-            ->with('item:id,name')
             ->join('items', 'signatures.item_id', '=', 'items.id')
             ->leftJoin('categories', 'items.category_id', '=', 'categories.id')
             ->search([
-                'items.name'      => $this->search['name'] ?? [],
+                'signatures.name' => $this->search['name'] ?? [],
                 'categories.name' => $this->search['categories'] ?? [],
                 'created_at'      => $this->search['created_at'] ?? [],
             ])

@@ -3,11 +3,13 @@
     'primary' => null,
     'danger' => null,
     'secondary' => null,
+    'info' => null,
 ])
 
 @php
     $color = match(true) {
         $danger => 'red',
+        $info => 'neutral',
         default => 'secondary'
     }
 @endphp
