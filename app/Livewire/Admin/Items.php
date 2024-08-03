@@ -56,6 +56,7 @@ class Items extends Component
                 'items.quantity',
                 'items.is_active',
                 'categories.name as category_name',
+                'categories.is_active as category_active',
             ])
             ->leftJoin('categories', 'categories.id', '=', 'items.category_id')
             ->search([

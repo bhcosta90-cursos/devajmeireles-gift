@@ -31,11 +31,15 @@
                 @foreach($this->records as $record)
                     <x-ui.table.tr>
                         <x-ui.table.td first>{{ $record->id }}</x-ui.table.td>
-                        <x-ui.table.td>{{ $record->category_name }}</x-ui.table.td>
+                        <x-ui.table.td>
+                            <x-ui.badge.active :value="$record->category_active" :label="$record->category_name" />
+                        </x-ui.table.td>
                         <x-ui.table.td>{{ $record->name }}</x-ui.table.td>
                         <x-ui.table.td class="text-right">{{ currency($record->price) }}</x-ui.table.td>
                         <x-ui.table.td class="text-right">{{ $record->quantity }}</x-ui.table.td>
-                        <x-ui.table.td><x-ui.badge.active :value="$record->is_active" /></x-ui.table.td>
+                        <x-ui.table.td>
+                            <x-ui.badge.active :value="$record->is_active" />
+                        </x-ui.table.td>
                         <x-ui.table.td>
                             <x-ui.action.edit
                                 @click="$dispatch('manager::edit', {item: {{ $record->id }}})"

@@ -1,9 +1,10 @@
 @props([
-    'value'
+    'value',
+    'label' => null,
 ])
 
 <x-ts-badge
-    :text="__($value ? 'Yes' : 'No')"
+    :text="__($label ?: ($value ? 'Yes' : 'No'))"
     :color="$value ? 'green': 'red'"
     outline
 />

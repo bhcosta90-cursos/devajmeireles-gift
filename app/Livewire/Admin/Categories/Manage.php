@@ -52,7 +52,9 @@ class Manage extends Component
 
     public function save(): Category | bool
     {
-        $data = $this->validate();
+        $data = $this->validate() + [
+            'is_active' => $this->active,
+        ];
 
         $response = $this->category
             ? $this->category->update($data)
