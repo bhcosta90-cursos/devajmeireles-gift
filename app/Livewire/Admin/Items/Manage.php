@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Items;
 
 use App\Livewire\Traits\Dialog;
+use App\Livewire\Traits\Model\SelectCategory;
 use App\Models\{Category, Item};
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
@@ -14,6 +15,7 @@ use Livewire\Component;
 class Manage extends Component
 {
     use Dialog;
+    use SelectCategory;
 
     public bool $slide = false;
 
