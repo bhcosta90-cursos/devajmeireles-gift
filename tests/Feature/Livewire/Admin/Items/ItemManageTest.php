@@ -4,12 +4,10 @@ declare(strict_types = 1);
 
 use App\Livewire\Admin\Items\Manage;
 use App\Models\{Category, Item};
+use Tests\Support\ValidateData;
 
 use function Pest\Laravel\{assertDatabaseCount, assertDatabaseHas};
-
 use function Pest\Livewire\livewire;
-
-use Tests\Support\ValidateData;
 
 describe('has livewire - admin - items - manage -> page', function () {
     beforeEach(fn () => mockAuthentication());
@@ -44,7 +42,7 @@ describe('has livewire - admin - items - manage -> page', function () {
         $category = Category::factory()->create();
         $item     = Item::factory()->make();
 
-        livewire(Manage::class)
+        livewire(Manage::class, ['slide' => true])
             ->set('category', $category->id)
             ->set('name', $item->name)
             ->set('description', $item->description)
@@ -53,10 +51,38 @@ describe('has livewire - admin - items - manage -> page', function () {
             ->set('price', $item->price)
             ->set('active', $item->active)
             ->assertSave()
+            ->assertSet('slide', false)
             ->assertDispatched('manage::list');
 
         $item->price *= 100;
         assertDatabaseCount(Item::class, 1);
         assertDatabaseHas(Item::class, $item->toArray());
+    });
+
+    it('can load and update an item and dispatch the correct event', function () {
+        $category = Category::factory()->create();
+        $item     = Item::factory()->create();
+
+        livewire(Manage::class)
+            ->call('load', $item->id)
+            ->assertSet('item.id', $item->id)
+            ->assertSet('slide', true)
+            ->set('category', $category->id)
+            ->set('name', $item->name)
+            ->set('description', $item->description)
+            ->set('reference', $item->reference)
+            ->set('quantity', $item->quantity)
+            ->set('price', $item->price)
+            ->set('active', $item->active)
+            ->assertSave()
+            ->assertSet('slide', false)
+            ->assertDispatched('manage::list');
+
+        $item->price *= 100;
+        assertDatabaseCount(Item::class, 1);
+        assertDatabaseHas(Item::class, collect($item->toArray())->except([
+            'created_at',
+            'updated_at',
+        ])->toArray());
     });
 });
