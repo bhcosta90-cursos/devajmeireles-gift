@@ -23,7 +23,7 @@ trait Search
             }
         });
 
-        $table = with(new static())->getTable();
+        $table = (new self())->getTable();
 
         if (($search['created_at'] ?? null) && is_array($search['created_at'])) {
             $query->when(

@@ -40,6 +40,7 @@ describe('has livewire - admin - signatures -> page', function () {
             ->toArray());
 
         livewire(Signatures::class)
+            ->set('sortColumn', 'signatures.id')
             ->assertSee('Signature 29')
             ->assertSee('Signature 18')
             ->assertDontSee('Signature 17')
