@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
+use App\Models\Trait\Search;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\{Model, SoftDeletes};
@@ -12,6 +13,7 @@ class Category extends Model
 {
     use SoftDeletes;
     use HasFactory;
+    use Search;
 
     protected $fillable = [
         'name',

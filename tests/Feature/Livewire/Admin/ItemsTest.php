@@ -63,7 +63,6 @@ describe('has livewire - admin - items -> page', function () {
         Item::insert(Item::factory()
             ->count(13)
             ->sequence(fn (Sequence $sequence) => ['name' => "Item {$sequence->index}"])
-            ->withCategory(Category::factory()->create())
             ->make()
             ->toArray());
 

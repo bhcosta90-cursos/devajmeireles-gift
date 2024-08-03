@@ -109,8 +109,14 @@ Testable::macro('toBeValidateErrors', function (array $datas, string $action = '
             $this->set($key, $item['value']);
         }
 
-        $this->call($action)
-            ->assertHasErrors($rules);
+        try {
+            $this->call($action)
+                ->assertHasErrors($rules);
+        } catch (Throwable $e) {
+            dump($data);
+
+            throw $e;
+        }
     }
 
     return $this->assertSuccessful();

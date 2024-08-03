@@ -19,7 +19,6 @@ describe('has livewire - admin - items - manage -> page', function () {
 
         $data = [
             ValidateData::make()
-                ->field('category', '', 'required')
                 ->field('name', '', 'required')
                 ->field('quantity', '', 'required')
                 ->field('price', '', 'required')

@@ -6,7 +6,7 @@ namespace App\Livewire\Admin\Items;
 
 use App\Action\Category\SelectCategoryAction;
 use App\Livewire\Traits\Dialog;
-use App\Models\{Category, Item};
+use App\Models\{Item};
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\{Computed, On};
@@ -45,20 +45,6 @@ class Manage extends Component
     public function listCategories(): array
     {
         return app(SelectCategoryAction::class)->handle();
-    }
-
-    #[Computed]
-    public function categories(): array
-    {
-        return Category::query()
-            ->get()
-            ->map(function (Category $category) {
-                return [
-                    'value' => $category->id,
-                    'label' => $category->name,
-                ];
-            })
-            ->toArray();
     }
 
     public function updatedSlide(): void
@@ -106,7 +92,7 @@ class Manage extends Component
     protected function rules(): array
     {
         return [
-            'category' => ['required', Rule::exists('categories', 'id')],
+            'category' => ['nullable', Rule::exists('categories', 'id')],
             'name'     => [
                 'required',
                 'string',
