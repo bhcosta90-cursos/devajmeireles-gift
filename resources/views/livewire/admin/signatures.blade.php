@@ -4,7 +4,12 @@
     </x-slot>
 
     <div class="space-y-4">
-        <x-ui.tag wire:model.live="search.name" label="Name"  />
+        <div class="space-y-2">
+            <div class="flex justify-end">
+                <livewire:signatures.filter />
+            </div>
+            <x-ui.tag wire:model.live="search.name" placeholder="Search by name"  />
+        </div>
 
         <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
             @forelse($records = $this->records as $signature)
