@@ -8,28 +8,14 @@ trait Search
 {
     public function scopeSearch($query, array $search, string | array | null $field = null): void
     {
-        if ($field !== null && !is_array($field)) {
-            $field = [$field];
-        }
-
-        $keys = collect(array_keys($search))
-            ->filter(fn ($key) => ($field && in_array($key, $field, true)) || $field === null)
-            ->toArray();
-
-        $newValues = [];
-
-        foreach ($search as $value) {
-            foreach ($value as $v) {
-                $newValues[] = $v;
+        $query->where(function ($query) use ($search) {
+            foreach ($search as $key => $value) {
+                $query->where(function ($query) use ($key, $value) {
+                    foreach ($value as $v) {
+                        $query->orWhere($key, 'like', "%{$v}%");
+                    }
+                });
             }
-        }
-
-        if ($newValues) {
-            $query->where(function ($query) use ($keys, $newValues) {
-                foreach ($newValues as $value) {
-                    $query->whereAny($keys, 'like', "%{$value}%");
-                }
-            });
-        }
+        });
     }
 }

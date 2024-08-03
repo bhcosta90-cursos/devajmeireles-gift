@@ -7,8 +7,8 @@
         <div class="flex justify-between items-end gap-8">
             <div class="flex-grow">
                 <div class="grid grid-cols-2 gap-4">
-                    <x-ui.tag wire:model.live="search.name" label="Item Name"  />
                     <x-ui.tag wire:model.live="search.category" label="Category"  />
+                    <x-ui.tag wire:model.live="search.name" label="Item Name"  />
                 </div>
             </div>
             <livewire:admin.items.manage />

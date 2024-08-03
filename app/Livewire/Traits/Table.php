@@ -15,6 +15,11 @@ trait Table
 
     public int $quantity = 10;
 
+    public function updatedSearch(): void
+    {
+        $this->setPage(1);
+    }
+
     #[Url]
     public string $sortColumn = 'id';
 

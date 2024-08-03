@@ -13,8 +13,8 @@ use Livewire\Component;
 
 class Items extends Component
 {
-    use Table;
     use Dialog;
+    use Table;
 
     public array $search = [
         'name'     => [],
@@ -59,8 +59,8 @@ class Items extends Component
             ])
             ->join('categories', 'categories.id', '=', 'items.category_id')
             ->search([
-                'items.name'      => $this->search['name'],
-                'categories.name' => $this->search['category'],
+                'items.name'      => $this->search['name'] ?? [],
+                'categories.name' => $this->search['category'] ?? [],
             ])
             ->orderBy($this->sortColumn, $this->sortDirection)
             ->simplePaginate(perPage: $this->quantity);
