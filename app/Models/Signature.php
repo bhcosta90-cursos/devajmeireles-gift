@@ -15,6 +15,13 @@ class Signature extends Model
     use SoftDeletes;
     use HasFactory;
     use Search;
+
+    protected $fillable = [
+        'name',
+        'item_id',
+        'created_at',
+    ];
+
     protected const CACHE_AVATAR = 'v1';
 
     public function item(): BelongsTo

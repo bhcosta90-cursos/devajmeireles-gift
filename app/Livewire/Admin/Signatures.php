@@ -8,7 +8,7 @@ use App\Livewire\Traits\{Dialog, Table};
 use App\Models\Signature;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
-use Livewire\Attributes\Computed;
+use Livewire\Attributes\{Computed, On};
 use Livewire\Component;
 
 class Signatures extends Component
@@ -17,7 +17,8 @@ class Signatures extends Component
     use Table;
 
     public array $search = [
-        'name' => [],
+        'name'       => [],
+        'categories' => [],
     ];
 
     public function render(): View
@@ -27,7 +28,7 @@ class Signatures extends Component
 
     public function mount(): void
     {
-        $this->sortColumn    = 'id';
+        $this->sortColumn    = 'signatures.created_at';
         $this->sortDirection = 'desc';
         $this->quantity      = 12;
     }
@@ -36,8 +37,17 @@ class Signatures extends Component
     public function records(): Paginator
     {
         return Signature::query()
+            ->select([
+                'signatures.*',
+            ])
             ->with('item:id,name')
-            ->search($this->search)
+            ->join('items', 'signatures.item_id', '=', 'items.id')
+            ->leftJoin('categories', 'items.category_id', '=', 'categories.id')
+            ->search([
+                'items.name'      => $this->search['name'] ?? [],
+                'categories.name' => $this->search['categories'] ?? [],
+                'created_at'      => $this->search['created_at'] ?? [],
+            ])
             ->orderBy($this->sortColumn, $this->sortDirection)
             ->simplePaginate($this->quantity);
     }
@@ -52,5 +62,15 @@ class Signatures extends Component
         $item->delete();
         $this->dispatch('manage::list');
         $this->notifyDeleted();
+    }
+
+    #[On('filter::advanced')]
+    public function listenerSearch(array $search): void
+    {
+        $this->setPage(1);
+
+        foreach ($search as $key => $value) {
+            $this->search[$key] = $value;
+        }
     }
 }
