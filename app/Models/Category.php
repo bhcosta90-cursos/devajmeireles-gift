@@ -24,6 +24,11 @@ class Category extends Model
         return $this->hasMany(Item::class);
     }
 
+    public function scopeActive(): void
+    {
+        $this->where('is_active', true);
+    }
+
     protected function casts(): array
     {
         return [

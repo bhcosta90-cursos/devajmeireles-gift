@@ -30,6 +30,7 @@ class Category extends Component
     public function listCategories(): array
     {
         return ModelCategory::query()
+            ->active()
             ->get()
             ->map(function (ModelCategory $category) {
                 return [
