@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Items;
 
-use App\Livewire\Traits\Dialog;
-use App\Livewire\Traits\Model\SelectCategory;
+use App\Livewire\Admin\Traits\Dialog;
+use App\Livewire\Admin\Traits\Model\SelectCategory;
 use App\Models\{Category, Item};
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;

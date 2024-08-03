@@ -4,7 +4,8 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin;
 
-use App\Livewire\Traits\{Dialog, Table};
+use App\Livewire\Admin\Traits\{Table};
+use App\Livewire\Admin\Traits\Dialog;
 use App\Models\Item;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
