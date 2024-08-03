@@ -8,13 +8,19 @@ use App\Models\Category;
 
 class SelectCategoryAction
 {
+    protected static $response = [];
+
     public function __construct(protected Category $category)
     {
     }
 
     public function handle(): array
     {
-        return $this->category
+        if (self::$response) {
+            return self::$response;
+        }
+
+        return self::$response = $this->category
             ->active()
             ->get()
             ->map(function (Category $category) {

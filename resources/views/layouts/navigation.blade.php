@@ -16,11 +16,11 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('items')" :active="request()->routeIs('items')">
+                    <x-nav-link :href="route('admin.items')" :active="request()->routeIs('admin.items')">
                         {{ __('Items') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('categories')" :active="request()->routeIs('categories')">
+                    <x-nav-link :href="route('admin.categories')" :active="request()->routeIs('admin.categories')">
                         {{ __('Categories') }}
                     </x-nav-link>
                 </div>

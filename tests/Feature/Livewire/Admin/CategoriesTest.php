@@ -15,7 +15,7 @@ describe('has livewire - admin - categories -> page', function () {
     beforeEach(fn () => mockAuthentication());
 
     it('can render component', function () {
-        get(route('categories'))
+        get(route('admin.categories'))
             ->assertSuccessful()
             ->assertSeeLivewire(Manage::class);
     });
