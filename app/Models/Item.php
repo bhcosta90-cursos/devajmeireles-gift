@@ -6,9 +6,9 @@ namespace App\Models;
 
 use App\Casts\FloatToIntCast;
 use App\Models\Trait\Search;
+use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 
 class Item extends Model
 {
@@ -25,6 +25,7 @@ class Item extends Model
         'is_active',
         'signed_at',
         'price',
+        'is_quotable',
     ];
 
     public function category(): BelongsTo
@@ -35,9 +36,10 @@ class Item extends Model
     protected function casts(): array
     {
         return [
-            'is_active' => 'boolean',
-            'signed_at' => 'timestamp',
-            'price'     => FloatToIntCast::class,
+            'is_active'   => 'boolean',
+            'is_quotable' => 'boolean',
+            'signed_at'   => 'timestamp',
+            'price'       => FloatToIntCast::class,
         ];
     }
 }

@@ -19,6 +19,7 @@ return new class () extends Migration {
             $table->timestamp('signed_at')->nullable();
             $table->unsignedBigInteger('price');
             $table->boolean('is_active')->default(true);
+            $table->boolean('is_quotable')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

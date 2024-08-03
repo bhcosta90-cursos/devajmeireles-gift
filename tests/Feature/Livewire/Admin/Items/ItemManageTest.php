@@ -56,6 +56,7 @@ describe('has livewire - admin - items - manage -> page', function () {
             ->set('quantity', $item->quantity)
             ->set('price', $item->price)
             ->set('active', $item->active)
+            ->set('quotable', $item->quotable)
             ->assertSave()
             ->assertSet('slide', false)
             ->assertDispatched('manage::list');

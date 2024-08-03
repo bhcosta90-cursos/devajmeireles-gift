@@ -36,6 +36,8 @@ class Manage extends Component
 
     public ?bool $active = true;
 
+    public ?bool $quotable = false;
+
     public function render(): View
     {
         return view('livewire.admin.items.manage');
@@ -65,6 +67,7 @@ class Manage extends Component
         $this->quantity    = $item->quantity;
         $this->price       = $item->price;
         $this->active      = $item->is_active;
+        $this->quotable    = $item->is_quotable;
 
         $this->slide = true;
         $this->title = 'Edit Item';
@@ -75,6 +78,7 @@ class Manage extends Component
         $data = $this->validate() + [
             'category_id' => $this->category,
             'is_active'   => $this->active,
+            'is_quotable' => $this->quotable,
         ];
 
         $response = $this->item
@@ -107,6 +111,7 @@ class Manage extends Component
             'quantity'    => ['required', 'integer', 'min:0'],
             'price'       => ['required', 'numeric', 'min:0'],
             'active'      => ['required', 'boolean'],
+            'quotable'    => ['required', 'boolean'],
         ];
     }
 }

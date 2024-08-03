@@ -55,6 +55,7 @@ class Items extends Component
                 'items.price',
                 'items.quantity',
                 'items.is_active',
+                'items.is_quotable',
                 'categories.name as category_name',
                 'categories.is_active as category_active',
             ])

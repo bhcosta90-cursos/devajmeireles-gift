@@ -1,7 +1,10 @@
 <div>
     <x-ui.slide :label="$title">
         <div class="space-y-4">
-            <x-ui.toggle wire:model="active" />
+            <div class="grid grid-cols-2">
+                <x-ui.toggle wire:model="active" />
+                <x-ui.toggle wire:model="quotable" label="Quota" />
+            </div>
             <div class="grid grid-cols-2 gap-4">
                 <x-models.category />
                 <x-ui.input type="url" label="Reference" wire:model="reference" />

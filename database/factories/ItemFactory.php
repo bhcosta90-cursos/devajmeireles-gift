@@ -28,6 +28,13 @@ class ItemFactory extends Factory
         ]);
     }
 
+    public function quotable(): self
+    {
+        return $this->state(fn () => [
+            'is_quotable' => true,
+        ]);
+    }
+
     public function signed(?Carbon $carbon): self
     {
         return $this->state(fn () => [

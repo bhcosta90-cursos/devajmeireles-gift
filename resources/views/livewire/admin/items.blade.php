@@ -22,6 +22,7 @@
                     <x-ui.table.th column="items.name" :$sortDirection :$sortColumn label="Item Name" />
                     <x-ui.table.th class="w-0" column="price" :$sortDirection :$sortColumn label="Item Price" />
                     <x-ui.table.th class="w-0" label="Item Quantity" />
+                    <x-ui.table.th class="w-0" label="Quota" />
                     <x-ui.table.th class="w-0" label="Active" />
                     <x-ui.table.th class="w-0 text-right" label="Actions" />
                 </x-ui.table.tr>
@@ -37,6 +38,9 @@
                         <x-ui.table.td>{{ $record->name }}</x-ui.table.td>
                         <x-ui.table.td class="text-right">{{ currency($record->price) }}</x-ui.table.td>
                         <x-ui.table.td class="text-right">{{ $record->quantity }}</x-ui.table.td>
+                        <x-ui.table.td>
+                            <x-ui.badge.active :value="$record->is_quotable" />
+                        </x-ui.table.td>
                         <x-ui.table.td>
                             <x-ui.badge.active :value="$record->is_active" />
                         </x-ui.table.td>
