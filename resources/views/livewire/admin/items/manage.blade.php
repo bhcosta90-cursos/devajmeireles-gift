@@ -1,6 +1,7 @@
 <div>
     <x-ui.slide :label="$title">
         <div class="space-y-4">
+            <x-ui.toggle wire:model="active" />
             <div class="grid grid-cols-2 gap-4">
                 <x-ui.select
                     wire:model="category"

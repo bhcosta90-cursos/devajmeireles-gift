@@ -33,6 +33,8 @@ class Manage extends Component
 
     public ?float $price = null;
 
+    public ?bool $active = true;
+
     public function render(): View
     {
         return view('livewire.admin.items.manage');
@@ -69,6 +71,7 @@ class Manage extends Component
         $this->reference   = $item->reference;
         $this->quantity    = $item->quantity;
         $this->price       = $item->price;
+        $this->active      = $item->is_active;
 
         $this->slide = true;
         $this->title = 'Edit Item';
@@ -78,6 +81,7 @@ class Manage extends Component
     {
         $data = $this->validate() + [
             'category_id' => $this->category,
+            'is_active'   => $this->active,
         ];
 
         $response = $this->item
@@ -101,6 +105,7 @@ class Manage extends Component
             'reference'   => ['nullable', 'url', 'max:255'],
             'quantity'    => ['required', 'integer', 'min:0'],
             'price'       => ['required', 'numeric', 'min:0'],
+            'active'      => ['required', 'boolean'],
         ];
     }
 }

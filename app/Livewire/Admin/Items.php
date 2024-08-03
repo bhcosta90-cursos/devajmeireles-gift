@@ -54,6 +54,7 @@ class Items extends Component
                 'items.name',
                 'items.price',
                 'items.quantity',
+                'items.is_active',
                 'categories.name as category_name',
             ])
             ->join('categories', 'categories.id', '=', 'items.category_id')
