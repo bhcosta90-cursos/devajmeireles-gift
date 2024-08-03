@@ -56,5 +56,4 @@
             <x-ui.pagination :$records/>
         @endif
     </div>
-    @dump($search)
 </div>
