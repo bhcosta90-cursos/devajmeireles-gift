@@ -3,11 +3,7 @@
         <div class="space-y-4">
             <x-ui.toggle wire:model="active" />
             <div class="grid grid-cols-2 gap-4">
-                <x-ui.select
-                    wire:model="category"
-                    label="Category"
-                    :options="$this->categories"
-                />
+                <x-models.category />
                 <x-ui.input type="url" label="Reference" wire:model="reference" />
             </div>
             <x-ui.input label="Name" wire:model="name" />
