@@ -5,9 +5,10 @@ declare(strict_types = 1);
 use App\Livewire\Admin\Items;
 use App\Livewire\Admin\Items\Manage;
 use App\Models\{Category, Item};
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 
-use function Pest\Laravel\get;
+use function Pest\Laravel\{assertSoftDeleted, get};
 use function Pest\Livewire\livewire;
 
 describe('has livewire - admin - items page', function () {
@@ -19,7 +20,7 @@ describe('has livewire - admin - items page', function () {
             ->assertSeeLivewire(Manage::class);
     });
 
-    it('can list items with correct names and categories', function () {
+    it('can list register with filters', function () {
         Category::insert(Category::factory(2)
             ->sequence(fn (Sequence $sequence) => ['name' => "Category {$sequence->index}"])
             ->make()
@@ -56,5 +57,39 @@ describe('has livewire - admin - items page', function () {
             ->assertSee('Item Category 0')
             ->assertDontSee('Item 0')
             ->assertSuccessful();
+    });
+
+    it('can paginate registers correctly', function () {
+        Item::insert(Item::factory()
+            ->count(13)
+            ->sequence(fn (Sequence $sequence) => ['name' => "Item {$sequence->index}"])
+            ->withCategory(Category::factory()->create())
+            ->make()
+            ->toArray());
+
+        livewire(Items::class)
+            ->assertSet('records', function ($data) {
+                expect($data)
+                    ->toBeInstanceOf(Paginator::class)
+                    ->toHaveCount(10);
+
+                return true;
+            })
+            ->call('setPage', 2)
+            ->assertSet('records', function ($data) {
+                expect($data)
+                    ->toBeInstanceOf(Paginator::class)
+                    ->toHaveCount(3);
+
+                return true;
+            });
+    });
+
+    it('can delete a register and dispatch the correct event', function () {
+        livewire(Items::class)
+            ->assertDelete(($item = Item::factory()->create())->id)
+            ->assertDispatched('manage::list');
+
+        assertSoftDeleted($item);
     });
 });

@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Features\SupportTesting\Testable;
 use Tests\TestCase;
 
 /*
@@ -66,3 +67,34 @@ function mockAuthentication(bool $createdUser = false): User
 
     return $user;
 }
+
+Testable::macro('assertDelete', function (mixed $params) {
+    return $this->assertConfirmation($params, 'delete');
+});
+
+Testable::macro('assertConfirmation', function (mixed $params, string $action) {
+    $this->call($action, $params)
+        ->assertDispatched(
+            event: 'tallstackui:dialog',
+            type: 'question',
+            title: __('Warning!'),
+            description: __('Are you sure?'),
+            options: [
+                "confirm" => [
+                    "static" => false,
+                    "text"   => __("Confirm"),
+                    "method" => $actionDelete = "can" . ucfirst($action),
+                    "params" => $params,
+                ],
+                "cancel" => [
+                    "static" => false,
+                    "text"   => __("Cancel"),
+                    "method" => null,
+                    "params" => null,
+                ],
+            ]
+        )->call($actionDelete, $params);
+
+    return $this;
+});
+
