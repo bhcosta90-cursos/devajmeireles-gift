@@ -19,6 +19,7 @@ class Signatures extends Component
     public array $search = [
         'name'       => [],
         'categories' => [],
+        'items'      => [],
     ];
 
     public function render(): View
@@ -45,6 +46,7 @@ class Signatures extends Component
             ->leftJoin('categories', 'items.category_id', '=', 'categories.id')
             ->search([
                 'signatures.name' => $this->search['name'] ?? [],
+                'items.name'      => $this->search['items'] ?? [],
                 'categories.name' => $this->search['categories'] ?? [],
                 'created_at'      => $this->search['created_at'] ?? [],
             ])

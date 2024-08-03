@@ -15,11 +15,13 @@ class Filter extends Component
     public array $search = [
         'categories' => [],
         'created_at' => [],
+        'items'      => [],
     ];
 
     public function mount(): void
     {
         $this->search['categories'] = request('search.categories', []);
+        $this->search['items']      = request('search.items', []);
         $this->search['created_at'] = request('search.created_at', [
             Signature::orderBy('created_at')->first()->created_at->format('Y-m-d'),
             now()->format('Y-m-d'),
