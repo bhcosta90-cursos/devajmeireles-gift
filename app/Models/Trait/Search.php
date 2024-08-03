@@ -4,11 +4,8 @@ declare(strict_types = 1);
 
 namespace App\Models\Trait;
 
-use JetBrains\PhpStorm\NoReturn;
-
 trait Search
 {
-    #[NoReturn]
     public function scopeSearch($query, array $search, string | array | null $field = null): void
     {
         if ($field !== null && !is_array($field)) {
