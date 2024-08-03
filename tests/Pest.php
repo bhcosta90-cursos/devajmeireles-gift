@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Component;
 use Livewire\Features\SupportTesting\Testable;
 use Tests\TestCase;
 
@@ -96,4 +97,32 @@ Testable::macro('assertConfirmation', function (mixed $params, string $action) {
         )->call($actionDelete, $params);
 
     return $this;
+});
+
+Testable::macro('toBeValidateErrors', function (array $datas, string $action = 'save') {
+    foreach ($datas as $data) {
+        $rules = [];
+
+        foreach ($data as $key => $item) {
+            $rules[$key] = $item['rule'];
+            /** @var Testable|Component $this */
+            $this->set($key, $item['value']);
+        }
+
+        $this->call($action)
+            ->assertHasErrors($rules);
+    }
+
+    return $this->assertSuccessful();
+});
+
+Testable::macro('assertSave', function ($action = 'save') {
+    return $this->call($action)
+        ->assertHasNoErrors()
+        ->assertDispatched(
+            event: 'tallstackui:toast',
+            type: 'success',
+            title: __('Register saved successfully!'),
+        )
+        ->assertSuccessful();
 });
