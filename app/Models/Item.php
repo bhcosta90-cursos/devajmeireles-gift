@@ -8,7 +8,7 @@ use App\Casts\FloatToIntCast;
 use App\Models\Trait\Search;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\{Model, SoftDeletes};
+use Illuminate\Database\Eloquent\{Model, Relations\HasMany, SoftDeletes};
 
 class Item extends Model
 {
@@ -31,6 +31,11 @@ class Item extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function signatures(): HasMany
+    {
+        return $this->hasMany(Signature::class);
     }
 
     protected function casts(): array
