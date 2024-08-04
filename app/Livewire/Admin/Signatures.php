@@ -35,6 +35,7 @@ class Signatures extends Component
     }
 
     #[Computed]
+    #[On('manage::list')]
     public function records(): Paginator
     {
         return Signature::query()

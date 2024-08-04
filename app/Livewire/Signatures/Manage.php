@@ -7,7 +7,9 @@ namespace App\Livewire\Signatures;
 use App\Enums\DeliveryType;
 use App\Livewire\Traits\Dialog;
 use App\Models\{Item, Signature};
+use DB;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\{Computed, On};
 use Livewire\Component;
@@ -63,7 +65,7 @@ class Manage extends Component
 
     }
 
-    public function save(): Signature | bool
+    public function save(): array | bool
     {
         $data = $this->validate() + [
             'item_id'  => $this->item,
@@ -72,7 +74,7 @@ class Manage extends Component
 
         $response = $this->signature
             ? $this->signature->update($data)
-            : Signature::create($data);
+            : $this->createSignature($data);
 
         $this->reset();
         $this->dispatch('manage::list');
@@ -86,6 +88,11 @@ class Manage extends Component
     public function getDelivery(): array
     {
         return DeliveryType::toSelect();
+    }
+
+    protected function createSignature(array $data): array
+    {
+        return DB::transaction(fn () => Collection::times($this->quantity, fn () => Signature::create($data))->toArray());
     }
 
     protected function rules(): array
