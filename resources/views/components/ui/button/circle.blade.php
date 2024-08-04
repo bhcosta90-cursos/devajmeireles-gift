@@ -10,6 +10,7 @@
     $color = match(true) {
         $danger => 'red',
         $info => 'neutral',
+        $primary => 'primary',
         default => 'secondary'
     }
 @endphp

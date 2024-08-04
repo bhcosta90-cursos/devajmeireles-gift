@@ -5,7 +5,8 @@
 
     <div class="space-y-4">
         <div class="space-y-2">
-            <div class="flex justify-end">
+            <div class="flex justify-end gap-3">
+                <livewire:signatures.manage />
                 <livewire:signatures.filter />
             </div>
             <x-ui.tag wire:model.live="search.name" placeholder="Search by subscription name"  />

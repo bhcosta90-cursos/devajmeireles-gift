@@ -3,7 +3,11 @@
     'title' => null,
 ])
 <div>
-    <x-ui.button.secondary :$label wire:click="$toggle('slide')" />
+    @isset($button)
+        {{ $button }}
+    @else
+        <x-ui.button.secondary :$label wire:click="$toggle('slide')" />
+    @endif
 
     <x-ui.slide.slide :title="$title ?: $label">
         {{ $slot }}
