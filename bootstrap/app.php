@@ -15,10 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->appendToGroup('web', [
-            LanguageMiddleware::class
+            LanguageMiddleware::class,
         ]);
         $middleware->appendToGroup('api', [
-            LanguageMiddleware::class
+            LanguageMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
