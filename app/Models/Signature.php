@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
+use App\Enums\DeliveryType;
 use App\Models\Trait\Search;
 use Cache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,7 +20,12 @@ class Signature extends Model
     protected $fillable = [
         'name',
         'item_id',
+        'delivery',
         'created_at',
+    ];
+
+    public $casts = [
+        'delivery' => DeliveryType::class,
     ];
 
     protected const CACHE_AVATAR = 'v1';
