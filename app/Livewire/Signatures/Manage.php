@@ -92,7 +92,15 @@ class Manage extends Component
 
     protected function createSignature(array $data): array
     {
-        return DB::transaction(fn () => Collection::times($this->quantity, fn () => Signature::create($data))->toArray());
+        return DB::transaction(function () use ($data) {
+            $response = $this->modelItem->signatures()
+                ->createMany(Collection::times($this->quantity, fn () => $data))
+                ->toArray();
+
+            $this->modelItem->update(['last_signed_at' => now()]);
+
+            return $response;
+        });
     }
 
     protected function rules(): array

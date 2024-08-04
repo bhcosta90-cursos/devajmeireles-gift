@@ -23,7 +23,7 @@ class Item extends Model
         'reference',
         'quantity',
         'is_active',
-        'signed_at',
+        'last_signed_at',
         'price',
         'is_quotable',
     ];
@@ -41,10 +41,10 @@ class Item extends Model
     protected function casts(): array
     {
         return [
-            'is_active'   => 'boolean',
-            'is_quotable' => 'boolean',
-            'signed_at'   => 'timestamp',
-            'price'       => FloatToIntCast::class,
+            'is_active'      => 'boolean',
+            'is_quotable'    => 'boolean',
+            'last_signed_at' => 'timestamp',
+            'price'          => FloatToIntCast::class,
         ];
     }
 

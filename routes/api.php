@@ -10,7 +10,7 @@ Route::name('api.')->group(function () {
     Route::get(
         '/categories',
         fn (Category $category, SearchFilter $searchFilter) => $searchFilter->handle($category->active()->orderBy('name'))
-    )->name('items');
+    )->name('categories');
 
     Route::get(
         '/items',

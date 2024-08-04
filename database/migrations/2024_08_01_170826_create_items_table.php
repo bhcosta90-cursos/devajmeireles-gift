@@ -16,7 +16,7 @@ return new class () extends Migration {
             $table->string('description')->nullable();
             $table->string('reference')->nullable();
             $table->unsignedInteger('quantity');
-            $table->timestamp('signed_at')->nullable();
+            $table->timestamp('last_signed_at')->nullable();
             $table->unsignedBigInteger('price');
             $table->boolean('is_active')->default(true);
             $table->boolean('is_quotable')->default(false);
