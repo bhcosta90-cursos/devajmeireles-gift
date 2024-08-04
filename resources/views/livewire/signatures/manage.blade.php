@@ -13,7 +13,7 @@
             <x-ui.select wire:model="delivery" :options="$this->getDelivery" label="Tipo de Entrega" />
             <x-ui.textarea max="200" wire:model="observation" label="Observation" />
 
-            @if ($modelItem && $modelItem->is_quotable && $modelItem->price && $quantity > 0)
+            @if ($modelItem && $modelItem->is_quotable && $modelItem->price && (blank($signature) ? $quantity > 0 : $modelItem->availableQuantity() > 1))
                 <div class="col-span-full">
                     <x-ts-alert outline center>
                         {!! trans_choice('signatures.quote', $this->quantity, [
