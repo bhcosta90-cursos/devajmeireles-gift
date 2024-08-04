@@ -6,13 +6,15 @@ namespace App\Enums\Traits;
 
 trait Selectable
 {
-    public static function toSelect(): array
+    public static function toSelect(?array $only = null, ?array $except = null): array
     {
         return collect(self::cases())
             ->map(fn (self $case) => [
                 'value' => $case->value,
                 'label' => $case->label($case),
             ])
+            ->only($only)
+            ->except($except)
             ->toArray();
     }
 
