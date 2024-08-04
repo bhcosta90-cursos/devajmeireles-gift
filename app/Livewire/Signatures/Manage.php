@@ -9,7 +9,7 @@ use App\Livewire\Traits\Dialog;
 use App\Models\{Item, Signature};
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
-use Livewire\Attributes\Computed;
+use Livewire\Attributes\{Computed, On};
 use Livewire\Component;
 
 class Manage extends Component
@@ -44,6 +44,23 @@ class Manage extends Component
     public function updatedItem(): void
     {
         $this->modelItem = Item::find($this->item);
+    }
+
+    #[On('manager::edit')]
+    public function load(Signature $signature): void
+    {
+        $this->signature = $signature;
+
+        $this->modelItem   = $signature->item;
+        $this->name        = $signature->name;
+        $this->item        = $signature->item_id;
+        $this->phone       = $signature->phone;
+        $this->observation = $signature->observation;
+        $this->delivery    = $signature->delivery->value;
+
+        $this->title = 'Edit Signature';
+        $this->slide = true;
+
     }
 
     public function save(): Signature | bool

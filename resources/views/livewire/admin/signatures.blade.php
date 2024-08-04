@@ -39,6 +39,12 @@
                         </div>
                         <div class="flex justify-end gap-1">
                             <x-ui.button.circle
+                                primary
+                                icon="pencil"
+                                @click="$dispatch('manager::edit', {signature: {{ $signature->id }}})"
+                            />
+
+                            <x-ui.button.circle
                                 danger
                                 icon="trash"
                                 wire:click="delete({{ $signature->id }})"
