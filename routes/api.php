@@ -27,10 +27,12 @@ Route::name('api.')->group(function () {
 
     Route::get(
         '/items',
-        fn (Item $item, SearchFilter $searchFilter) => $searchFilter->handle($item
-            ->active()
-            ->orderBy('name')
-        ))->name('items');
+        fn (Item $item, SearchFilter $searchFilter) => $searchFilter->handle(
+            $item
+                ->active()
+                ->orderBy('name')
+        )
+    )->name('items');
 
     Route::get('/v1/items', fn (Item $item, Request $request) => $item
         ->active()
