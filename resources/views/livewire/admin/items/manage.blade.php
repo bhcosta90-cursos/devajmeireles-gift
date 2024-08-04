@@ -6,7 +6,7 @@
                 <x-ui.toggle wire:model="quotable" label="Quota" />
             </div>
             <div class="grid grid-cols-2 gap-4">
-                <x-models.category />
+                <x-filter.category wire:model="category" />
                 <x-ui.input type="url" label="Reference" wire:model="reference" />
             </div>
             <x-ui.input label="Name" wire:model="name" />

@@ -42,4 +42,19 @@ class Item extends Model
             'price'       => FloatToIntCast::class,
         ];
     }
+
+    public function scopeActive($query): void
+    {
+        $query->where('is_active', true);
+    }
+
+    public function priceQuoted(int $quantity, bool $realQuantity = true): float
+    {
+        return $this->price / ($realQuantity ? $this->availableQuantity() : $this->quantity) * $quantity;
+    }
+
+    public function availableQuantity(): int
+    {
+        return ($this->quantity - $this->signatures()->count());
+    }
 }

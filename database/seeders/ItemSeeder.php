@@ -18,6 +18,11 @@ class ItemSeeder extends Seeder
             ->each(function (Item $item) use ($categories) {
                 $item->price *= 100;
                 $item->category_id = fake()->randomElement($categories);
+                $item->is_quotable = fake()->boolean();
+
+                if ($item->is_quotable) {
+                    $item->name = 'Quota ' . $item->name;
+                }
             });
 
         Item::upsert($items->toArray(), uniqueBy: ['name']);
