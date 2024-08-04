@@ -4,12 +4,11 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Items;
 
-use App\Action\Category\SelectCategoryAction;
 use App\Livewire\Traits\Dialog;
 use App\Models\{Item};
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
-use Livewire\Attributes\{Computed, On};
+use Livewire\Attributes\{On};
 use Livewire\Component;
 
 class Manage extends Component
@@ -41,12 +40,6 @@ class Manage extends Component
     public function render(): View
     {
         return view('livewire.admin.items.manage');
-    }
-
-    #[Computed]
-    public function listCategories(): array
-    {
-        return app(SelectCategoryAction::class)->handle();
     }
 
     public function updatedSlide(): void
