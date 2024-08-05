@@ -15,9 +15,9 @@ enum CardType: int
     public function label(): string
     {
         return match ($this) {
-            self::AllItems      => __('All Items'),
-            self::ItemSigned    => __('Item Signed'),
-            self::ItemNotSigned => __('Item Not Signed'),
+            self::AllItems      => __('All items'),
+            self::ItemSigned    => __('Item signed'),
+            self::ItemNotSigned => __('Item not signed'),
         };
     }
 }
