@@ -1,16 +1,21 @@
 <div>
     <div class="mt-6"
          x-data="{
-            values : [{{ collect($this->chart)->map(fn (int $value) => $value)->join(',') }}],
-            labels : [{{ collect($this->chart)->keys()->map(fn (string $date, int $value) => "'$date'")->join(',') }}],
+            values: [],
+            labels: [],
             async init() {
-                let chart = new ApexCharts(this.$refs.chart, this.options)
+                this.updateChartData(@json($this->chart));
+                let chart = new ApexCharts(this.$refs.chart, this.options);
+                await chart.render();
 
-                await chart.render()
-
-                this.$watch('values', () => {
-                    chart.updateOptions(this.options).then(r => {})
-                })
+                this.$watch('$wire.chart', (newChart) => {
+                    this.updateChartData(newChart);
+                    chart.updateOptions(this.options).then(r => {});
+                });
+            },
+            updateChartData(chartData) {
+                this.values = Object.values(chartData);
+                this.labels = Object.keys(chartData);
             },
             get options () {
                 return {

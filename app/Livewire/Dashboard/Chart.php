@@ -12,6 +12,8 @@ use Livewire\Component;
 
 class Chart extends Component
 {
+    public array $chart = [];
+
     public function render(): View
     {
         return view('livewire.dashboard.chart');
@@ -19,10 +21,15 @@ class Chart extends Component
 
     public function load(): void
     {
+        $this->chart = collect($this->dates())
+            ->merge($this->count())
+            ->mapWithKeys(fn (int $value, string $date) => [
+                Carbon::parse($date)->format('d/m') => $value,
+            ])->toArray();
     }
 
     #[Computed]
-    public function chart(): array
+    public function _chart(): array
     {
         return collect($this->dates())
             ->merge($this->count())
