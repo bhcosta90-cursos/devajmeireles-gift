@@ -15,13 +15,13 @@ class SignatureSeeder extends Seeder
     {
         $categories = Category::all()->pluck('id')->toArray();
 
-        DB::transaction(fn () => Signature::factory(30)
+        DB::transaction(fn () => Signature::factory(100)
             ->sequence(fn (Sequence $sequence) => [
                 'item_id' => Item::factory()->create([
                     'name'        => "Signature: " . $sequence->index,
                     'category_id' => fake()->randomElement($categories),
                 ]),
-                'created_at' => fake()->dateTimeBetween('-15 days')->format('Y-m-d H:i:s'),
+                'created_at' => fake()->dateTimeBetween('-45 days')->format('Y-m-d H:i:s'),
             ])
             ->create());
     }

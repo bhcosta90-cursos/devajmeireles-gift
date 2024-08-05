@@ -6,12 +6,13 @@ namespace App\Livewire\Dashboard;
 
 use App\Models\Signature;
 use Carbon\{Carbon, CarbonInterval, CarbonPeriod};
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class Chart extends Component
 {
-    public function render()
+    public function render(): View
     {
         return view('livewire.dashboard.chart');
     }
@@ -31,7 +32,7 @@ class Chart extends Component
 
     }
 
-    private function dates(): array
+    protected function dates(): array
     {
         $period = new CarbonPeriod(
             now()->subMonthNoOverflow(),
@@ -40,11 +41,11 @@ class Chart extends Component
         );
 
         return collect($period->toArray())
-            ->mapWithKeys(fn (Carbon $date) => [$date->format('Y-m-d') => 0]) // @phpstan-ignore-line
+            ->mapWithKeys(fn (Carbon $date) => [$date->format('Y-m-d') => 0])
             ->toArray();
     }
 
-    private function count(): array
+    protected function count(): array
     {
         return Signature::query()
             ->selectRaw("DATE(created_at) as date, COUNT(*) as total")

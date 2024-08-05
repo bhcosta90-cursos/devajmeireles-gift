@@ -5,13 +5,15 @@ declare(strict_types = 1);
 namespace App\Livewire\Dashboard;
 
 use App\Enums\CardType;
+use App\Models\Item;
 use Illuminate\Contracts\View\View;
-use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class Card extends Component
 {
     public CardType $card;
+
+    public $quantity = 0;
 
     public function render(): View
     {
@@ -20,12 +22,10 @@ class Card extends Component
 
     public function load(): void
     {
-        sleep(rand(0, 5));
-    }
-
-    #[Computed]
-    public function quantity(): int
-    {
-        return rand(1, 99);
+        $this->quantity = (match ($this->card) {
+            CardType::AllItems      => Item::count(),
+            CardType::ItemSigned    => Item::whereHas('signatures')->count(),
+            CardType::ItemNotSigned => Item::whereDoesntHave('signatures')->count(),
+        });
     }
 }
