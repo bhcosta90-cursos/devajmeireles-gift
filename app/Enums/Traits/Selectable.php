@@ -11,12 +11,12 @@ trait Selectable
         return collect(self::cases())
             ->map(fn (self $case) => [
                 'value' => $case->value,
-                'label' => $case->label($case),
+                'label' => $case->label(),
             ])
             ->only($only)
             ->except($except)
             ->toArray();
     }
 
-    abstract public function label($type): string;
+    abstract public function label(): string;
 }

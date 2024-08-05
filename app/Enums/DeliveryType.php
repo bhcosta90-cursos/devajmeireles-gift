@@ -11,7 +11,7 @@ enum DeliveryType: int
     case InPerson = 1;
     case Remotely = 2;
 
-    public function label($type): string
+    public function label(): string
     {
         return match ($this) {
             self::InPerson => __('In Person'),
