@@ -12,6 +12,6 @@ if (!function_exists('currency')) {
             default => $language ?: 'BRL',
         };
 
-        return Number::currency($value, in: $language);
+        return Number::currency(number: $value, in: $language);
     }
 }
