@@ -21,7 +21,7 @@ class SignatureSeeder extends Seeder
                     'name'        => "Signature: " . $sequence->index,
                     'category_id' => fake()->randomElement($categories),
                 ]),
-                'created_at' => fake()->dateTimeBetween('-5 days')->format('Y-m-d H:i:s'),
+                'created_at' => fake()->dateTimeBetween('-15 days')->format('Y-m-d H:i:s'),
             ])
             ->create());
     }
