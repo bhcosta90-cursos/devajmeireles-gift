@@ -20,7 +20,7 @@ class Card extends Component
 
     public function load(): void
     {
-        sleep(rand(0,5));
+        sleep(rand(0, 5));
     }
 
     #[Computed]
