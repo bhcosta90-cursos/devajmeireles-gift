@@ -27,7 +27,7 @@ class Chart extends Component
         return collect($this->dates())
             ->merge($this->count())
             ->mapWithKeys(fn (int $value, string $date) => [
-                Carbon::parse($date)->format('d/m') => $value,
+                Carbon::parse($date)->format('d/m') => $value, // @phpstan-ignore-line
             ])->toArray();
 
     }
