@@ -239,6 +239,7 @@ return [
         'blood_type'            => 'tipo sanguíneo',
         'birth_date'            => 'data de nascimento',
         'delivery'              => 'entrega',
+        'price'                 => 'preço',
     ],
 
 ];

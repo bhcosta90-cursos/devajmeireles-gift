@@ -8,6 +8,7 @@ use App\Livewire\Traits\Dialog;
 use App\Models\{Item};
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\RequiredIf;
 use Livewire\Attributes\{On};
 use Livewire\Component;
 
@@ -102,7 +103,7 @@ class Manage extends Component
             'description' => ['nullable', 'string', 'max:255'],
             'reference'   => ['nullable', 'url', 'max:255'],
             'quantity'    => ['required', 'integer', 'min:0'],
-            'price'       => ['required', 'numeric', 'min:0'],
+            'price'       => ['nullable', new RequiredIf($this->quotable), 'numeric', 'min:0'],
             'active'      => ['required', 'boolean'],
             'quotable'    => ['required', 'boolean'],
         ];
