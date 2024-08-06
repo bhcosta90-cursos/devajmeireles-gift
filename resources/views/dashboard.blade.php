@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <livewire:dashboard.card :card="\App\Enums\CardType::AllItems" />
+                <livewire:dashboard.card iso :card="\App\Enums\CardType::AllItems" />
                 <livewire:dashboard.card :card="\App\Enums\CardType::ItemSigned" />
                 <livewire:dashboard.card :card="\App\Enums\CardType::ItemNotSigned" />
             </div>

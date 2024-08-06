@@ -7,8 +7,10 @@ namespace App\Livewire\Dashboard;
 use App\Enums\CardType;
 use App\Models\Item;
 use Illuminate\Contracts\View\View;
+use Livewire\Attributes\Isolate;
 use Livewire\Component;
 
+#[Isolate]
 class Card extends Component
 {
     public CardType $card;

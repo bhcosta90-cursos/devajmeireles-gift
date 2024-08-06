@@ -7,9 +7,10 @@ namespace App\Livewire\Dashboard;
 use App\Models\Signature;
 use Carbon\{Carbon, CarbonInterval, CarbonPeriod};
 use Illuminate\Contracts\View\View;
-use Livewire\Attributes\Computed;
+use Livewire\Attributes\{Computed, Isolate};
 use Livewire\Component;
 
+#[Isolate]
 class Chart extends Component
 {
     public array $chart = [];
