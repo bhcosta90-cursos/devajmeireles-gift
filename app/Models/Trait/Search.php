@@ -4,20 +4,22 @@ declare(strict_types = 1);
 
 namespace App\Models\Trait;
 
+use Illuminate\Database\Eloquent\Builder;
+
 trait Search
 {
-    public function scopeSearch($query, array $search, string | array | null $field = null): void
+    public function scopeSearch(Builder $query, array $search, string | array | null $field = null): void
     {
         $searchFiltered = collect($search)
             ->filter(fn ($v, $k) => $k === $field || $field === null)
             ->except(['created_at'])
             ->toArray();
 
-        $query->where(function ($query) use ($searchFiltered) {
+        $query->where(function (Builder $query) use ($searchFiltered) {
             foreach ($searchFiltered as $key => $value) {
                 $query->where(function ($query) use ($key, $value) {
                     foreach ($value as $v) {
-                        $query->orWhere($key, 'like', "%{$v}%");
+                        $query->orWhereLike($key, "%{$v}%", caseSensitive: false);
                     }
                 });
             }
