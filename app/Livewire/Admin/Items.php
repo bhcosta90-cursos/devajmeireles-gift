@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin;
 
-use App\Livewire\Traits\{HasDialog, HasTable};
+use App\Livewire\Traits\{HasDialog, HasPermission, HasTable};
 use App\Models\Item;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
@@ -15,6 +15,7 @@ class Items extends Component
 {
     use HasDialog;
     use HasTable;
+    use HasPermission;
 
     public array $search = [
         'name'     => [],
@@ -25,6 +26,7 @@ class Items extends Component
     {
         $this->sortColumn    = 'items.name';
         $this->sortDirection = 'asc';
+        $this->verifyPermission();
     }
 
     public function render(): View
@@ -66,5 +68,17 @@ class Items extends Component
             ])
             ->orderBy($this->sortColumn, $this->sortDirection)
             ->simplePaginate(perPage: $this->quantity);
+    }
+
+    protected function getPermissionName(): string
+    {
+        return 'viewAny';
+    }
+
+    protected function getPermissionParams(): array
+    {
+        return [
+            Item::class,
+        ];
     }
 }

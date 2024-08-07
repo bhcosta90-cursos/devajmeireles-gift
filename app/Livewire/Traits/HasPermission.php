@@ -10,7 +10,7 @@ trait HasPermission
 {
     use AuthorizesRequests;
 
-    abstract protected function getPermission(): string;
+    abstract protected function getPermissionName(): string;
 
     public function mount(): void
     {
@@ -19,7 +19,7 @@ trait HasPermission
 
     protected function verifyPermission(): void
     {
-        $this->authorize($this->getPermission(), ...$this->getPermissionParams());
+        $this->authorize($this->getPermissionName(), ...$this->getPermissionParams());
     }
 
     protected function getPermissionParams(): array

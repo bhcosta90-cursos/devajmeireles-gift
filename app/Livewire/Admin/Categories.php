@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin;
 
-use App\Livewire\Traits\{HasDialog, HasTable};
+use App\Livewire\Traits\{HasDialog, HasPermission, HasTable};
 use App\Models\Category;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
@@ -15,6 +15,7 @@ class Categories extends Component
 {
     use HasDialog;
     use HasTable;
+    use HasPermission;
 
     public function render(): View
     {
@@ -56,5 +57,17 @@ class Categories extends Component
             ->search($this->search)
             ->orderBy($this->sortColumn, $this->sortDirection)
             ->simplePaginate(perPage: $this->quantity);
+    }
+
+    protected function getPermissionName(): string
+    {
+        return 'viewAny';
+    }
+
+    protected function getPermissionParams(): array
+    {
+        return [
+            Category::class,
+        ];
     }
 }
