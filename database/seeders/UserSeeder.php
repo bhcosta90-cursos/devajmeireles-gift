@@ -18,17 +18,17 @@ class UserSeeder extends Seeder
         ];
 
         User::factory()->asRole(UserRole::Admin)->create([
-            'email' => 'bhcosta90@gmail.com',
+            'login' => 'admin',
             'role'  => UserRole::Admin,
         ] + $default);
 
         User::factory()->asRole(UserRole::User)->create([
-            'email' => 'bhcosta90-user@gmail.com',
+            'login' => 'user',
             'role'  => UserRole::User,
         ] + $default);
 
         User::factory()->asRole(UserRole::Guest)->create([
-            'email' => 'bhcosta90-guest@gmail.com',
+            'login' => 'guest',
             'role'  => UserRole::Guest,
         ] + $default);
     }
