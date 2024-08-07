@@ -17,17 +17,19 @@
     >
 
         {{ __($label) ?? $slot }}
-        <span class="ml-2 flex-none rounded">
+        @isset($sortColumn)
+            <span class="ml-2 flex-none rounded">
 
-            @if ($sortColumn === $column && $sortDirection === 'asc')
-                <x-heroicon-s-chevron-up class="inline-block w-4 h-4 ml-1 text-primary-700"/>
-            @elseif ($sortColumn === $column && $sortDirection === 'desc')
-                <x-heroicon-s-chevron-down class="inline-block w-4 h-4 ml-1 text-primary-700"/>
-            @endif
+                @if ($sortColumn === $column && $sortDirection === 'asc')
+                    <x-heroicon-s-chevron-up class="inline-block w-4 h-4 ml-1 text-primary-700"/>
+                @elseif ($sortColumn === $column && $sortDirection === 'desc')
+                    <x-heroicon-s-chevron-down class="inline-block w-4 h-4 ml-1 text-primary-700"/>
+                @endif
 
-            @if ($sortColumn !== $column)
-                <x-heroicon-s-chevron-down class="inline-block w-4 h-4 ml-1 text-primary-700"/>
-            @endif
-        </span>
+                @if ($sortColumn !== $column)
+                    <x-heroicon-s-chevron-down class="inline-block w-4 h-4 ml-1 text-primary-700"/>
+                @endif
+            </span>
+        @endif
     </span>
 </th>

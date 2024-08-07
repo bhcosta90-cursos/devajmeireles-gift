@@ -240,6 +240,7 @@ return [
         'birth_date'            => 'data de nascimento',
         'delivery'              => 'entrega',
         'price'                 => 'preço',
+        'key'                   => 'chave',
     ],
 
 ];

@@ -1,12 +1,15 @@
 @props([
     'label',
     'title',
+    'permission' => true,
 ])
 <div>
-    @isset($button)
-        {{ $button }}
-    @else
-        <x-ui.button.secondary :$label wire:click="$toggle('slide')" />
+    @if($permission)
+        @isset($button)
+            {{ $button }}
+        @else
+            <x-ui.button.secondary :$label wire:click="$toggle('slide')" />
+        @endif
     @endif
 
     <x-ui.slide.slide :title="__($title ?: $label)">

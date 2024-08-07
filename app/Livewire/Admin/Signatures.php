@@ -76,4 +76,10 @@ class Signatures extends Component
             $this->search[$key] = $value;
         }
     }
+
+    #[Computed]
+    public function canManage(): bool
+    {
+        return auth()->user()->can('manage', Signature::class);
+    }
 }

@@ -1,3 +1,4 @@
+@php use App\Models\Signature; @endphp
 <div>
     <x-slot name="header">
         {{ __('Signatures') }}
@@ -6,8 +7,10 @@
     <div class="space-y-4">
         <div class="space-y-2">
             <div class="flex justify-end gap-3">
-                <livewire:signatures.manage />
-                <livewire:signatures.filter />
+                @if($this->canManage)
+                    <livewire:signatures.manage />
+                    <livewire:signatures.filter />
+                @endcan
             </div>
             <x-ui.tag wire:model.live="search.name" placeholder="Search by subscription name"  />
         </div>
@@ -37,19 +40,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flex justify-end gap-1">
-                            <x-ui.button.circle
-                                primary
-                                icon="pencil"
-                                @click="$dispatch('manager::edit', {signature: {{ $signature->id }}})"
-                            />
+                        @if($this->canManage)
+                            <div class="flex justify-end gap-1">
+                                <x-ui.button.circle
+                                    primary
+                                    icon="pencil"
+                                    @click="$dispatch('manager::edit', {signature: {{ $signature->id }}})"
+                                />
 
-                            <x-ui.button.circle
-                                danger
-                                icon="trash"
-                                wire:click="delete({{ $signature->id }})"
-                            />
-                        </div>
+                                <x-ui.button.circle
+                                    danger
+                                    icon="trash"
+                                    wire:click="delete({{ $signature->id }})"
+                                />
+                            </div>
+                        @endif
                     </x-ui.card>
                 </div>
             @empty
