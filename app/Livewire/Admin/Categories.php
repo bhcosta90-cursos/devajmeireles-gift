@@ -4,7 +4,11 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin;
 
-use App\Livewire\Traits\{HasDialog, HasPermission, HasPermissionDelete, HasPermissionEdit, HasTable};
+use App\Livewire\Traits\{HasDialog,
+    HasTable,
+    Permission\HasPermissionDelete,
+    Permission\HasPermissionEdit,
+    Permission\HasPermissionIndex};
 use App\Models\Category;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
@@ -15,7 +19,7 @@ class Categories extends Component
 {
     use HasDialog;
     use HasTable;
-    use HasPermission;
+    use HasPermissionIndex;
     use HasPermissionDelete;
     use HasPermissionEdit;
 

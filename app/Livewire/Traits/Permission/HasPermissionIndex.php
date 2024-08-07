@@ -2,11 +2,11 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Traits;
+namespace App\Livewire\Traits\Permission;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-trait HasPermission
+trait HasPermissionIndex
 {
     use AuthorizesRequests;
 

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin;
 
-use App\Livewire\Traits\{HasDialog, HasPermission, HasTable};
+use App\Livewire\Traits\{HasDialog, HasTable, Permission\HasPermissionIndex};
 use App\Models\Setting;
 use App\Services\Facades\Settings as SettingsFacade;
 use Illuminate\Contracts\View\View;
@@ -16,7 +16,7 @@ class Settings extends Component
 {
     use HasTable;
     use HasDialog;
-    use HasPermission;
+    use HasPermissionIndex;
 
     public function mount(): void
     {
