@@ -6,6 +6,7 @@ namespace App\Livewire\Admin\Settings;
 
 use App\Livewire\Traits\Dialog;
 use App\Models\Setting;
+use App\Services\Facades\Settings;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -49,8 +50,7 @@ class Update extends Component
 
     public function save(): void
     {
-        $this->setting->value = $this->value;
-        $this->setting->save();
+        Settings::set($this->setting->key, $this->setting->value, $this->setting->type);
 
         $this->slide = false;
         $this->dispatch('manage::list');
