@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @method static string|null get(string $key, mixed $default = null)
  * @method static Setting set(string $key, mixed $value, string $type = 'string')
+ * @method static void forgot(string $key)
  * @see SettingsService
  */
 class Settings extends Facade

@@ -20,4 +20,9 @@ class SettingPolicy
     {
         return $user->isAdmin();
     }
+
+    public function delete(User $user): bool
+    {
+        return $user->isAdmin();
+    }
 }

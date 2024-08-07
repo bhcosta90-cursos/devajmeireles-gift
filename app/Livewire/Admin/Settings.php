@@ -4,8 +4,9 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin;
 
-use App\Livewire\Traits\Table;
+use App\Livewire\Traits\{Dialog, Table};
 use App\Models\Setting;
+use App\Services\Facades\Settings as SettingsFacade;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\{Computed, On};
@@ -14,6 +15,7 @@ use Livewire\Component;
 class Settings extends Component
 {
     use Table;
+    use Dialog;
 
     public function mount(): void
     {
@@ -33,5 +35,23 @@ class Settings extends Component
         return Setting::query()
             ->orderBy($this->sortColumn, $this->sortDirection)
             ->get();
+    }
+
+    public function delete(Setting $setting): void
+    {
+        $this->deleteItem($setting->id);
+    }
+
+    public function canDelete(Setting $setting): void
+    {
+        $setting->delete();
+        SettingsFacade::forgot($setting->key);
+        $this->notifyDeleted();
+    }
+
+    #[Computed]
+    public function buttonDeleted(): bool
+    {
+        return auth()->user()->can('delete', Setting::class);
     }
 }

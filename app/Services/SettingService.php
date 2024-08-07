@@ -25,7 +25,7 @@ class SettingService
 
     public function set(string $key, mixed $value, string $type = 'string'): Setting
     {
-        Cache::forget("settings::{$key}");
+        $this->forgot($key);
 
         return Setting::updateOrCreate([
             'key' => strtoupper($key),
@@ -33,6 +33,11 @@ class SettingService
             'value' => $type === 'boolean' ? (bool) $value : $value,
             'type'  => $type,
         ]);
+    }
+
+    public function forgot(string $key): void
+    {
+        Cache::forget("settings::{$key}");
     }
 
     private function parse(string $result): string
