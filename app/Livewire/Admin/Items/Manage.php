@@ -6,6 +6,7 @@ namespace App\Livewire\Admin\Items;
 
 use App\Livewire\Traits\Dialog;
 use App\Models\{Item};
+use Arr;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\RequiredIf;
@@ -69,7 +70,7 @@ class Manage extends Component
 
     public function save(): Item | bool
     {
-        $data = $this->validate() + [
+        $data = Arr::except($this->validate(), ['active', 'category', 'quotable']) + [
             'category_id' => $this->category,
             'is_active'   => $this->active,
             'is_quotable' => $this->quotable,

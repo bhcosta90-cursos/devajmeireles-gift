@@ -6,6 +6,7 @@ namespace App\Livewire\Admin\Categories;
 
 use App\Livewire\Traits\Dialog;
 use App\Models\Category;
+use Arr;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\On;
@@ -49,7 +50,7 @@ class Manage extends Component
 
     public function save(): Category | bool
     {
-        $data = $this->validate() + [
+        $data = Arr::except($this->validate(), 'active') + [
             'is_active' => $this->active,
         ];
 

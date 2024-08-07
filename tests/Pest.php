@@ -2,6 +2,7 @@
 
 declare(strict_types = 1);
 
+use App\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Component;
@@ -47,9 +48,9 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function mockAuthentication(bool $createdUser = false): User
+function mockAuthentication(bool $createdUser = false, UserRole $role = UserRole::Admin): User
 {
-    $user = User::factory()->make();
+    $user = User::factory()->asRole($role)->make();
 
     if ($createdUser) {
         $user->save();
