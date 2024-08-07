@@ -7,7 +7,7 @@ namespace App\Livewire\Traits;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 
-trait Table
+trait HasTable
 {
     use WithPagination;
 

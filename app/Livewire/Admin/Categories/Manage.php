@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Categories;
 
-use App\Livewire\Traits\Dialog;
+use App\Livewire\Traits\HasDialog;
 use App\Models\Category;
 use Arr;
 use Illuminate\Contracts\View\View;
@@ -14,7 +14,7 @@ use Livewire\Component;
 
 class Manage extends Component
 {
-    use Dialog;
+    use HasDialog;
 
     public bool $slide = false;
 

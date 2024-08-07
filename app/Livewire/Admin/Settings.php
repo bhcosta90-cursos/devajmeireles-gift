@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin;
 
-use App\Livewire\Traits\{Dialog, Table};
+use App\Livewire\Traits\{HasDialog, HasTable};
 use App\Models\Setting;
 use App\Services\Facades\Settings as SettingsFacade;
 use Illuminate\Contracts\View\View;
@@ -14,8 +14,8 @@ use Livewire\Component;
 
 class Settings extends Component
 {
-    use Table;
-    use Dialog;
+    use HasTable;
+    use HasDialog;
 
     public function mount(): void
     {

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin;
 
-use App\Livewire\Traits\{Dialog, Table};
+use App\Livewire\Traits\{HasDialog, HasTable};
 use App\Models\Category;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
@@ -13,8 +13,8 @@ use Livewire\Component;
 
 class Categories extends Component
 {
-    use Dialog;
-    use Table;
+    use HasDialog;
+    use HasTable;
 
     public function render(): View
     {

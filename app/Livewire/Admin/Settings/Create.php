@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Settings;
 
-use App\Livewire\Traits\Dialog;
+use App\Livewire\Traits\HasDialog;
 use App\Models\Setting;
 use App\Services\Facades\Settings;
 use Illuminate\Contracts\View\View;
@@ -13,7 +13,7 @@ use Livewire\Component;
 
 class Create extends Component
 {
-    use Dialog;
+    use HasDialog;
 
     public bool $slide = false;
 

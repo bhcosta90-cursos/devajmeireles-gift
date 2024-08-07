@@ -6,7 +6,7 @@ namespace App\Livewire\Traits;
 
 use TallStackUi\Traits\Interactions;
 
-trait Dialog
+trait HasDialog
 {
     use Interactions;
 
