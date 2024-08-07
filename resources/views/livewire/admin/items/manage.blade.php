@@ -1,5 +1,9 @@
 <div>
-    <x-ui.slide label="Create Item" :title="$item ? 'Edit Item' : 'Create Item'">
+    <x-ui.slide
+        label="Create Item"
+        :permission="auth()->user()->can('create', \App\Models\Item::class)"
+        :title="$item ? 'Edit Item' : 'Create Item'"
+    >
         <div class="space-y-4">
             <div class="grid grid-cols-2">
                 <x-ui.toggle wire:model="active" />

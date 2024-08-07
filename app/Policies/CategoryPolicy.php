@@ -15,4 +15,9 @@ class CategoryPolicy
     {
         return $user->isAdmin() || $user->isUser();
     }
+
+    public function create(User $user): bool
+    {
+        return $user->isAdmin() || $user->isUser();
+    }
 }

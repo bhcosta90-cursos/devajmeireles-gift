@@ -1,5 +1,9 @@
 <div>
-    <x-ui.slide label="Create Signature" :title="$signature ? 'Edit Signature' : 'Create Signature'">
+    <x-ui.slide
+        label="Create Signature"
+        :permission="auth()->user()->can('create', \App\Models\Signature::class)"
+        :title="$signature ? 'Edit Signature' : 'Create Signature'"
+    >
         <x-slot:button>
             <x-ui.button.circle primary icon="plus" label="12" wire:click="createItem" md />
         </x-slot:button>

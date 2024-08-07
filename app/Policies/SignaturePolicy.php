@@ -15,4 +15,9 @@ class SignaturePolicy
     {
         return !$user->isGuest();
     }
+
+    public function create(User $user): bool
+    {
+        return $user->isAdmin() || $user->isUser();
+    }
 }
