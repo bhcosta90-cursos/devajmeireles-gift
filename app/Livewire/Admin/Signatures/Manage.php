@@ -6,6 +6,7 @@ namespace App\Livewire\Admin\Signatures;
 
 use App\Enums\DeliveryType;
 use App\Livewire\Traits\HasDialog;
+use App\Livewire\Traits\Permission\HasPermissionCreate;
 use App\Models\{Item, Signature};
 use DB;
 use Illuminate\Contracts\View\View;
@@ -17,6 +18,7 @@ use Livewire\Component;
 class Manage extends Component
 {
     use HasDialog;
+    use HasPermissionCreate;
 
     public bool $slide = false;
 
@@ -38,7 +40,7 @@ class Manage extends Component
 
     public ?int $delivery = null;
 
-    public function mount()
+    public function mount(): void
     {
         $this->authorize('manage', Signature::class);
     }
@@ -153,6 +155,13 @@ class Manage extends Component
             'phone'       => 'required',
             'observation' => 'nullable',
             'delivery'    => ['required', Rule::enum(DeliveryType::class)],
+        ];
+    }
+
+    protected function getCreatePermissionParams(): array
+    {
+        return [
+            Signature::class,
         ];
     }
 }

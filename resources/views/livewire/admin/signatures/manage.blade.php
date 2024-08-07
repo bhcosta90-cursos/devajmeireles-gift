@@ -1,7 +1,7 @@
 <div>
     <x-ui.slide
         label="Create Signature"
-        :permission="auth()->user()->can('create', \App\Models\Signature::class)"
+        :permission="$this->buttonCreate"
         :title="$signature ? 'Edit Signature' : 'Create Signature'"
     >
         <x-slot:button>

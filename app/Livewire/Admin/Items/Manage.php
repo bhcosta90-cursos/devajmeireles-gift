@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Items;
 
 use App\Livewire\Traits\HasDialog;
+use App\Livewire\Traits\Permission\HasPermissionCreate;
 use App\Models\{Item};
 use Arr;
 use Illuminate\Contracts\View\View;
@@ -16,6 +17,7 @@ use Livewire\Component;
 class Manage extends Component
 {
     use HasDialog;
+    use HasPermissionCreate;
 
     public bool $slide = false;
 
@@ -112,6 +114,13 @@ class Manage extends Component
             'price'       => ['nullable', new RequiredIf($this->quotable), 'numeric', 'min:0'],
             'active'      => ['required', 'boolean'],
             'quotable'    => ['required', 'boolean'],
+        ];
+    }
+
+    protected function getCreatePermissionParams(): array
+    {
+        return [
+            Item::class,
         ];
     }
 }

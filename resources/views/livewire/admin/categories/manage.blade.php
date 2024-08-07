@@ -1,7 +1,7 @@
 <div>
     <x-ui.slide
         label="Create Category"
-        :permission="auth()->user()->can('create', \App\Models\Category::class)"
+        :permission="$this->buttonCreate"
         :title="$category ? 'Edit Category' : 'Create Category'"
     >
         <div class="space-y-4">
