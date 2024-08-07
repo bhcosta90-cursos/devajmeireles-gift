@@ -1,14 +1,16 @@
 <div>
     <x-ui.slide :label="$title">
         <x-slot:button>
-            <x-ui.button.circle primary icon="plus" label="12" wire:click="$toggle('slide')" md />
+            <x-ui.button.circle primary icon="plus" label="12" wire:click="createItem" md />
         </x-slot:button>
         <div class="space-y-4">
             <x-ui.input label="Name" wire:model="name" />
             <x-filter.item wire:model.live="item" />
-            <div class="grid grid-cols-2 gap-4">
+            <div @class(['grid gap-4', 'grid-cols-2' => blank($modelItem)])>
                 <x-ui.input label="Cell phone" x-mask="(99) 99999-9999" wire:model="phone" />
-                <x-ui.input.number label="Quantity" min="1" wire:model.change="quantity" />
+                @empty($modelItem)
+                    <x-ui.input.number label="Quantity" min="1" wire:model.change="quantity" />
+                @endif
             </div>
             <x-ui.select wire:model="delivery" :options="$this->getDelivery" label="Tipo de Entrega" />
             <x-ui.textarea max="200" wire:model="observation" label="Observation" />

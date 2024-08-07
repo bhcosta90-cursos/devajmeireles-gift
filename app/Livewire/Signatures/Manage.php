@@ -48,6 +48,12 @@ class Manage extends Component
         $this->modelItem = Item::find($this->item);
     }
 
+    public function createItem(): void
+    {
+        $this->reset();
+        $this->slide = true;
+    }
+
     #[On('manager::edit')]
     public function load(Signature $signature): void
     {
