@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Signatures;
+namespace App\Livewire\Admin\Signatures;
 
 use App\Models\Signature;
 use Illuminate\View\View;
@@ -32,7 +32,7 @@ class Filter extends Component
 
     public function render(): View
     {
-        return view('livewire.signatures.filter');
+        return view('livewire.admin.signatures.filter');
     }
 
     public function removeFilters(): void

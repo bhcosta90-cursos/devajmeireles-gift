@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Signatures;
+namespace App\Livewire\Admin\Signatures;
 
 use App\Enums\DeliveryType;
 use App\Livewire\Traits\Dialog;
@@ -45,7 +45,7 @@ class Manage extends Component
 
     public function render(): View
     {
-        return view('livewire.signatures.manage');
+        return view('livewire.admin.signatures.manage');
     }
 
     public function updatedItem(): void

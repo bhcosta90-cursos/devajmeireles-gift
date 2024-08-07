@@ -8,8 +8,8 @@
         <div class="space-y-2">
             <div class="flex justify-end gap-3">
                 @if($this->canManage)
-                    <livewire:signatures.manage />
-                    <livewire:signatures.filter />
+                    <livewire:admin.signatures.manage />
+                    <livewire:admin.signatures.filter />
                 @endcan
             </div>
             <x-ui.tag wire:model.live="search.name" placeholder="Search by subscription name"  />
