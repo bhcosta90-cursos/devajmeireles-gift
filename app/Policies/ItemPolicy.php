@@ -20,4 +20,14 @@ class ItemPolicy
     {
         return $user->isAdmin() || $user->isUser();
     }
+
+    public function edit(User $user): bool
+    {
+        return $user->isAdmin() || $user->isUser();
+    }
+
+    public function delete(User $user): bool
+    {
+        return $user->isAdmin() || $user->isUser();
+    }
 }

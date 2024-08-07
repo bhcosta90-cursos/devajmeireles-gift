@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin;
 
-use App\Livewire\Traits\{HasDialog, HasPermission, HasTable};
+use App\Livewire\Traits\{HasDialog, HasPermission, HasPermissionDelete, HasPermissionEdit, HasTable};
 use App\Models\Item;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
@@ -16,6 +16,8 @@ class Items extends Component
     use HasDialog;
     use HasTable;
     use HasPermission;
+    use HasPermissionEdit;
+    use HasPermissionDelete;
 
     public array $search = [
         'name'     => [],
@@ -70,12 +72,21 @@ class Items extends Component
             ->simplePaginate(perPage: $this->quantity);
     }
 
-    protected function getPermissionName(): string
+    protected function getPermissionParams(): array
     {
-        return 'viewAny';
+        return [
+            Item::class,
+        ];
     }
 
-    protected function getPermissionParams(): array
+    protected function getEditPermissionParams(): array
+    {
+        return [
+            Item::class,
+        ];
+    }
+
+    protected function getDeletePermissionParams(): array
     {
         return [
             Item::class,

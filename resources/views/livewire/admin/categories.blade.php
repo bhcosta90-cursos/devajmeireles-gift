@@ -31,14 +31,19 @@
                         <x-ui.table.td>{{ $record->name }}</x-ui.table.td>
                         <x-ui.table.td><x-ui.badge.active :value="$record->is_active" /></x-ui.table.td>
                         <x-ui.table.td>
-                            <x-ui.action.edit
-                                @click="$dispatch('manager::edit', {category: {{ $record->id }}})"
-                                type="edit"
-                            />
-                            <x-ui.action.danger
-                                type="delete"
-                                wire:click="delete({{ $record->id }})"
-                            />
+                            @if($this->buttonEdit)
+                                <x-ui.action.edit
+                                    @click="$dispatch('manager::edit', {category: {{ $record->id }}})"
+                                    type="edit"
+                                />
+                            @endif
+
+                            @if($this->buttonDelete)
+                                <x-ui.action.danger
+                                    type="delete"
+                                    wire:click="delete({{ $record->id }})"
+                                />
+                            @endif
                         </x-ui.table.td>
                     </x-ui.table.tr>
                 @endforeach

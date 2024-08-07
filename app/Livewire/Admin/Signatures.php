@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin;
 
-use App\Livewire\Traits\{HasDialog, HasPermission, HasTable};
+use App\Livewire\Traits\{HasDialog, HasPermission, HasPermissionDelete, HasPermissionEdit, HasTable};
 use App\Models\Signature;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
@@ -16,6 +16,8 @@ class Signatures extends Component
     use HasDialog;
     use HasTable;
     use HasPermission;
+    use HasPermissionDelete;
+    use HasPermissionEdit;
 
     public array $search = [
         'name'       => [],
@@ -90,6 +92,20 @@ class Signatures extends Component
     }
 
     protected function getPermissionParams(): array
+    {
+        return [
+            Signature::class,
+        ];
+    }
+
+    protected function getEditPermissionParams(): array
+    {
+        return [
+            Signature::class,
+        ];
+    }
+
+    protected function getDeletePermissionParams(): array
     {
         return [
             Signature::class,

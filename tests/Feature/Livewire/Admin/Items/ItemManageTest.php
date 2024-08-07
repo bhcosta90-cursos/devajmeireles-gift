@@ -23,7 +23,7 @@ describe('has livewire - admin - items - manage -> page', function () {
                 ->field('quantity', '', 'required')
                 ->run(),
             ValidateData::make()
-                ->field('category', '1', 'exists')
+                ->field('category', '100', 'exists')
                 ->run(),
             ValidateData::make()
                 ->field('name', 1, 'min:2')

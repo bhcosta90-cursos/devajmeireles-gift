@@ -70,6 +70,11 @@ class Manage extends Component
 
     public function save(): Item | bool
     {
+        $this->authorize(
+            $this->item ? "edit" : "create",
+            $this->item ?: Item::class,
+        );
+
         $data = Arr::except($this->validate(), ['active', 'category', 'quotable']) + [
             'category_id' => $this->category,
             'is_active'   => $this->active,

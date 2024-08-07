@@ -79,6 +79,11 @@ class Manage extends Component
 
     public function save(): array | bool
     {
+        $this->authorize(
+            $this->item ? "edit" : "create",
+            $this->item ?: Signature::class,
+        );
+
         $data = $this->validate() + [
             'item_id'  => $this->item,
             'delivery' => $this->delivery,

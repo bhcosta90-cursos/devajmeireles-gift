@@ -10,8 +10,6 @@ trait HasPermission
 {
     use AuthorizesRequests;
 
-    abstract protected function getPermissionName(): string;
-
     public function mount(): void
     {
         $this->verifyPermission();
@@ -22,8 +20,10 @@ trait HasPermission
         $this->authorize($this->getPermissionName(), ...$this->getPermissionParams());
     }
 
-    protected function getPermissionParams(): array
+    protected function getPermissionName(): string
     {
-        return [];
+        return 'viewAny';
     }
+
+    abstract protected function getPermissionParams(): array;
 }
