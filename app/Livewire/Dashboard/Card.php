@@ -4,8 +4,9 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Dashboard;
 
-use App\Enums\CardType;
+use App\Enums\{CardType, SecondsType};
 use App\Models\Item;
+use Cache;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Isolate;
 use Livewire\Component;
@@ -24,10 +25,14 @@ class Card extends Component
 
     public function load(): void
     {
-        $this->quantity = (match ($this->card) {
-            CardType::AllItems      => Item::count(),
-            CardType::ItemSigned    => Item::whereHas('signatures')->count(),
-            CardType::ItemNotSigned => Item::whereDoesntHave('signatures')->count(),
-        });
+        $this->quantity = Cache::remember(
+            key: 'card::' . $this->card->value,
+            ttl: SecondsType::Minute->value * 5,
+            callback: fn () => match ($this->card) {
+                CardType::AllItems      => Item::count(),
+                CardType::ItemSigned    => Item::whereHas('signatures')->count(),
+                CardType::ItemNotSigned => Item::whereDoesntHave('signatures')->count(),
+            }
+        );
     }
 }

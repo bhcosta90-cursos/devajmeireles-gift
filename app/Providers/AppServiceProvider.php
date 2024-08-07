@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Services\Facades\Settings;
 use App\Services\SettingService;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
             Settings::class,
             fn () => $this->app->make(SettingService::class)
         );
+
+        $this->app->isProduction() || Model::shouldBeStrict();
 
     }
 

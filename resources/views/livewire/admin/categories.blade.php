@@ -11,6 +11,9 @@
             <livewire:admin.categories.manage />
         </div>
 
+        <div wire:loading>
+            <x-ui.loading />
+        </div>
         <x-ui.table :records="$this->records">
             <x-ui.table.thead>
                 <x-ui.table.tr>
