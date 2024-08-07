@@ -53,6 +53,11 @@ class Item extends Model
         $query->where('is_active', true);
     }
 
+    public function available(): bool
+    {
+        return $this->signatures()->count() < $this->quantity;
+    }
+
     public function priceQuoted(int $quantity, bool $realQuantity = true): float
     {
         return $this->price / ($realQuantity ? $this->availableQuantity() : $this->quantity) * $quantity;

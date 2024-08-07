@@ -10,7 +10,7 @@ use App\Models\{Item, Signature};
 use DB;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
-use Illuminate\Validation\Rule;
+use Illuminate\Validation\{Rule, ValidationException};
 use Livewire\Attributes\{Computed, On};
 use Livewire\Component;
 
@@ -73,7 +73,7 @@ class Manage extends Component
         ];
 
         $response = $this->signature
-            ? $this->signature->update($data)
+            ? $this->updateSignature($data)
             : $this->createSignature($data);
 
         $this->reset();
@@ -113,5 +113,30 @@ class Manage extends Component
             'observation' => 'nullable',
             'delivery'    => ['required', Rule::enum(DeliveryType::class)],
         ];
+    }
+
+    public function updateSignature(array $data): bool
+    {
+        $current   = $this->signature->item;
+        $different = $current->isNot($this->modelItem);
+
+        if ($different && !$this->modelItem->available()) {
+            $this->resetExcept();
+
+            throw ValidationException::withMessages(['item' => __('Item is not available')]);
+        }
+
+        if ($different) {
+            if ($this->quantity === 1 || $this->modelItem->signatures()->count() === $this->quantity) {
+                $this->modelItem->is_active = false;
+            }
+
+            $this->modelItem->last_signed_at = now();
+            $this->modelItem->save();
+
+            $current->update(['last_signed_at' => null]);
+        }
+
+        return $this->signature->update($data);
     }
 }
