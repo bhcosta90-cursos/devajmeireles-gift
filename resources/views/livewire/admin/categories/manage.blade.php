@@ -1,5 +1,5 @@
 <div>
-    <x-ui.slide :label="$title">
+    <x-ui.slide label="Create Category" :title="$category ? 'Edit Category' : 'Create Category'">
         <div class="space-y-4">
             <x-ui.toggle wire:model="active" />
             <x-ui.input label="Name" wire:model="name" />

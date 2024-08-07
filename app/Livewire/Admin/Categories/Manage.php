@@ -17,8 +17,6 @@ class Manage extends Component
 
     public bool $slide = false;
 
-    public string $title = 'Create Category';
-
     public ?Category $category = null;
 
     public ?string $name = null;
@@ -47,7 +45,6 @@ class Manage extends Component
         $this->active = $category->is_active;
 
         $this->slide = true;
-        $this->title = 'Edit Category';
     }
 
     public function save(): Category | bool

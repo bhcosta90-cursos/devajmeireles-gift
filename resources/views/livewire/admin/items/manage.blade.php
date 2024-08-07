@@ -1,5 +1,5 @@
 <div>
-    <x-ui.slide :label="$title">
+    <x-ui.slide label="Create Item" :title="$item ? 'Edit Item' : 'Create Item'">
         <div class="space-y-4">
             <div class="grid grid-cols-2">
                 <x-ui.toggle wire:model="active" />

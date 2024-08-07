@@ -1,6 +1,6 @@
 @props([
     'label',
-    'title' => null,
+    'title',
 ])
 <div>
     @isset($button)
