@@ -100,12 +100,36 @@ class Manage extends Component
     {
         return DB::transaction(function () use ($data) {
             $response = $this->modelItem->signatures()
-                ->createMany(Collection::times($this->quantity, fn () => $data))
+                ->createMany(Collection::times($data['quantity'], fn () => $data))
                 ->toArray();
 
             $this->modelItem->update(['last_signed_at' => now()]);
 
             return $response;
+        });
+    }
+
+    protected function updateSignature(array $data): bool
+    {
+        return DB::transaction(function () use ($data) {
+            if (($current = $this->signature->item)->isNot($this->modelItem)) {
+                if (!$this->modelItem->available()) {
+                    $this->resetExcept();
+
+                    throw ValidationException::withMessages(['item' => __('Item is not available')]);
+                }
+
+                if ($data['quantity'] === 1 || $this->modelItem->signatures()->count() === $data['quantity']) {
+                    $this->modelItem->is_active = false;
+                }
+
+                $this->modelItem->last_signed_at = now();
+                $this->modelItem->save();
+
+                $current->update(['last_signed_at' => null]);
+            }
+
+            return $this->signature->update($data);
         });
     }
 
@@ -119,32 +143,5 @@ class Manage extends Component
             'observation' => 'nullable',
             'delivery'    => ['required', Rule::enum(DeliveryType::class)],
         ];
-    }
-
-    public function updateSignature(array $data): bool
-    {
-        return DB::transaction(function () use ($data) {
-            $current   = $this->signature->item;
-            $different = $current->isNot($this->modelItem);
-
-            if ($different) {
-                if (!$this->modelItem->available()) {
-                    $this->resetExcept();
-
-                    throw ValidationException::withMessages(['item' => __('Item is not available')]);
-                }
-
-                if ($this->quantity === 1 || $this->modelItem->signatures()->count() === $this->quantity) {
-                    $this->modelItem->is_active = false;
-                }
-
-                $this->modelItem->last_signed_at = now();
-                $this->modelItem->save();
-
-                $current->update(['last_signed_at' => null]);
-            }
-
-            return $this->signature->update($data);
-        });
     }
 }
