@@ -1,4 +1,4 @@
 @props([
     'label' => null,
 ])
-<x-ui.date :label="__($label)" range helpers {{ $attributes }} />
+<x-ui.input.date :label="__($label)" range helpers {{ $attributes }} />
