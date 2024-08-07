@@ -123,26 +123,28 @@ class Manage extends Component
 
     public function updateSignature(array $data): bool
     {
-        $current   = $this->signature->item;
-        $different = $current->isNot($this->modelItem);
+        return DB::transaction(function () use ($data) {
+            $current   = $this->signature->item;
+            $different = $current->isNot($this->modelItem);
 
-        if ($different && !$this->modelItem->available()) {
-            $this->resetExcept();
+            if ($different) {
+                if (!$this->modelItem->available()) {
+                    $this->resetExcept();
 
-            throw ValidationException::withMessages(['item' => __('Item is not available')]);
-        }
+                    throw ValidationException::withMessages(['item' => __('Item is not available')]);
+                }
 
-        if ($different) {
-            if ($this->quantity === 1 || $this->modelItem->signatures()->count() === $this->quantity) {
-                $this->modelItem->is_active = false;
+                if ($this->quantity === 1 || $this->modelItem->signatures()->count() === $this->quantity) {
+                    $this->modelItem->is_active = false;
+                }
+
+                $this->modelItem->last_signed_at = now();
+                $this->modelItem->save();
+
+                $current->update(['last_signed_at' => null]);
             }
 
-            $this->modelItem->last_signed_at = now();
-            $this->modelItem->save();
-
-            $current->update(['last_signed_at' => null]);
-        }
-
-        return $this->signature->update($data);
+            return $this->signature->update($data);
+        });
     }
 }
