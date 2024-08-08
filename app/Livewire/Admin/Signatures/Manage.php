@@ -161,7 +161,7 @@ class Manage extends Component
             'item'        => ['required', Rule::exists('items', 'id')],
             'quantity'    => 'required|numeric|min:1',
             'phone'       => 'required',
-            'observation' => 'nullable',
+            'observation' => 'nullable|max:200',
             'delivery'    => ['required', Rule::enum(DeliveryType::class)],
         ];
     }
