@@ -123,13 +123,22 @@ Testable::macro('toBeValidateErrors', function (array $datas, string $action = '
     return $this->assertSuccessful();
 });
 
-Testable::macro('assertSave', function ($action = 'save') {
-    return $this->call($action)
-        ->assertHasNoErrors()
-        ->assertDispatched(
-            event: 'tallstackui:toast',
-            type: 'success',
-            title: __('Register saved successfully!'),
-        )
+Testable::macro('assertSave', function ($action = 'save', array $errors = []) {
+    $response = $this->call($action)
+        ->assertSuccessful();
+
+    if (blank($errors)) {
+        $response->assertHasNoErrors()
+            ->assertDispatched(
+                event: 'tallstackui:toast',
+                type: 'success',
+                title: __('Register saved successfully!'),
+            );
+
+        return $response;
+    }
+
+    return $response
+        ->assertHasErrors($errors)
         ->assertSuccessful();
 });

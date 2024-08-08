@@ -13,12 +13,12 @@ class SettingPolicy
 
     public function viewAny(User $user): bool
     {
-        return $user->isAdmin() || $user->isUser();
+        return !$user->isGuest();
     }
 
     public function edit(User $user): bool
     {
-        return $user->isAdmin() || $user->isUser();
+        return !$user->isGuest();
     }
 
     public function create(User $user): bool
