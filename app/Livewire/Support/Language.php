@@ -17,7 +17,7 @@ class Language extends Component
         return view('livewire.support.language');
     }
 
-    public function mount()
+    public function mount(): View
     {
         $this->url = url()->full();
     }
