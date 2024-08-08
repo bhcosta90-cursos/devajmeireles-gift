@@ -42,6 +42,8 @@ class Manage extends Component
     #[On('manager::edit')]
     public function load(Category $category): void
     {
+        $this->authorize('edit', $category);
+
         $this->category = $category;
 
         $this->name   = $category->name;

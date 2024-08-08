@@ -97,16 +97,12 @@ class Signatures extends Component
 
     protected function getPermissionParams(): array
     {
-        return [
-            Signature::class,
-        ];
+        return $this->getDeletePermissionParams();
     }
 
     protected function getEditPermissionParams(): array
     {
-        return [
-            Signature::class,
-        ];
+        return $this->getDeletePermissionParams();
     }
 
     protected function getDeletePermissionParams(): array

@@ -67,19 +67,15 @@ class Categories extends Component
 
     protected function getPermissionParams(): array
     {
-        return [
-            Category::class,
-        ];
-    }
-
-    protected function getDeletePermissionParams(): array
-    {
-        return [
-            Category::class,
-        ];
+        return $this->getDeletePermissionParams();
     }
 
     protected function getEditPermissionParams(): array
+    {
+        return $this->getDeletePermissionParams();
+    }
+
+    protected function getDeletePermissionParams(): array
     {
         return [
             Category::class,

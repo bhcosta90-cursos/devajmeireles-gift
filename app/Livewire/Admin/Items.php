@@ -78,16 +78,12 @@ class Items extends Component
 
     protected function getPermissionParams(): array
     {
-        return [
-            Item::class,
-        ];
+        return $this->getDeletePermissionParams();
     }
 
     protected function getEditPermissionParams(): array
     {
-        return [
-            Item::class,
-        ];
+        return $this->getDeletePermissionParams();
     }
 
     protected function getDeletePermissionParams(): array

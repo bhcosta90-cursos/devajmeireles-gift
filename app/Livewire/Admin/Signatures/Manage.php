@@ -64,6 +64,8 @@ class Manage extends Component
     #[On('manager::edit')]
     public function load(Signature $signature): void
     {
+        $this->authorize('edit', $signature);
+
         $this->signature = $signature;
         $this->authorize('manage', $signature);
 
