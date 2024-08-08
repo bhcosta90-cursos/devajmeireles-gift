@@ -4,14 +4,12 @@ declare(strict_types = 1);
 
 use App\Livewire\Admin\Signatures\Manage;
 use App\Models\{Item, Signature};
-
-use function Pest\Laravel\{assertDatabaseCount, assertDatabaseHas};
-
-use function Pest\Livewire\livewire;
-
 use Tests\Support\ValidateData;
 
-describe('has livewire - admin - signatures - signatures - manage -> page', function () {
+use function Pest\Laravel\{assertDatabaseCount, assertDatabaseHas};
+use function Pest\Livewire\livewire;
+
+describe('has livewire - admin - signatures - signatures - manage -> component', function () {
     beforeEach(function () {
         mockAuthentication();
         $this->item = Item::factory()->create(['quantity' => 6]);

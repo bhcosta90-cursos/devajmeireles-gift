@@ -4,14 +4,12 @@ declare(strict_types = 1);
 
 use App\Livewire\Admin\Categories\Manage;
 use App\Models\{Category};
-
-use function Pest\Laravel\{assertDatabaseCount, assertDatabaseHas};
-
-use function Pest\Livewire\livewire;
-
 use Tests\Support\ValidateData;
 
-describe('has livewire - admin - categories - manage -> page', function () {
+use function Pest\Laravel\{assertDatabaseCount, assertDatabaseHas};
+use function Pest\Livewire\livewire;
+
+describe('has livewire - admin - categories - manage -> component', function () {
     beforeEach(fn () => mockAuthentication());
 
     it('validates category fields correctly', function () {

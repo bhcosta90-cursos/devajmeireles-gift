@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Sequence;
 use function Pest\Laravel\{assertSoftDeleted, get};
 use function Pest\Livewire\livewire;
 
-describe('has livewire - admin - signatures -> page', function () {
+describe('has livewire - admin - signatures -> component', function () {
     beforeEach(fn () => mockAuthentication());
 
     it('can render component', function () {
