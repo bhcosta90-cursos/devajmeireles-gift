@@ -23,14 +23,11 @@ class Update extends Component
 
     public mixed $value = null;
 
-    public function mount(): void
-    {
-        $this->authorize('viewAny', Setting::class);
-    }
-
     #[On('manager::edit')]
     public function load(Setting $setting): void
     {
+        $this->authorize('edit', $setting);
+
         $this->setting = $setting;
 
         $this->key   = $setting->key;

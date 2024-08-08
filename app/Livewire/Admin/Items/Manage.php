@@ -55,6 +55,8 @@ class Manage extends Component
     #[On('manager::edit')]
     public function load(Item $item): void
     {
+        $this->authorize('edit', $item);
+
         $this->item = $item;
 
         $this->name        = $item->name;

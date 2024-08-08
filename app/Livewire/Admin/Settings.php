@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin;
 
-use App\Livewire\Traits\{HasDialog, HasTable, Permission\HasPermissionIndex};
+use App\Livewire\Traits\{HasDialog, HasTable, Permission\HasPermissionDelete, Permission\HasPermissionIndex};
 use App\Models\Setting;
 use App\Services\Facades\Settings as SettingsFacade;
 use Illuminate\Contracts\View\View;
@@ -17,6 +17,7 @@ class Settings extends Component
     use HasTable;
     use HasDialog;
     use HasPermissionIndex;
+    use HasPermissionDelete;
 
     public function mount(): void
     {
@@ -47,18 +48,13 @@ class Settings extends Component
     {
         $setting->delete();
         SettingsFacade::forgot($setting->key);
+
         $this->notifyDeleted();
     }
 
-    #[Computed]
-    public function buttonDeleted(): bool
+    protected function getDeletePermissionParams(): array
     {
-        return auth()->user()->can('delete', Setting::class);
-    }
-
-    protected function getPermissionName(): string
-    {
-        return 'viewAny';
+        return $this->getPermissionParams();
     }
 
     protected function getPermissionParams(): array
