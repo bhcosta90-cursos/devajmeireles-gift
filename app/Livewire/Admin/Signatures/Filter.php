@@ -37,7 +37,6 @@ class Filter extends Component
 
     public function removeFilters(): void
     {
-
         $this->dispatch('filter::advanced', $this->search = collect($this->search)
             ->map(fn () => [])
             ->merge(['created_at' => $this->search['created_at']])
