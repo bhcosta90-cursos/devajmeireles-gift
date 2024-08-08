@@ -22,6 +22,8 @@ class Signature extends Model
         'item_id',
         'delivery',
         'created_at',
+        'observation',
+        'phone',
     ];
 
     public $casts = [

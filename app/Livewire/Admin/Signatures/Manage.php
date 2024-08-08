@@ -8,6 +8,7 @@ use App\Enums\DeliveryType;
 use App\Livewire\Traits\HasDialog;
 use App\Livewire\Traits\Permission\HasPermissionCreate;
 use App\Models\{Item, Signature};
+use Arr;
 use DB;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
@@ -84,8 +85,8 @@ class Manage extends Component
     public function save(): array | bool
     {
         $this->authorize(
-            $this->item ? "edit" : "create",
-            $this->item ?: Signature::class,
+            $this->signature ? "edit" : "create",
+            $this->signature ?: Signature::class,
         );
 
         $data = $this->validate() + [
@@ -115,7 +116,12 @@ class Manage extends Component
     {
         return DB::transaction(function () use ($data) {
             $response = $this->modelItem->signatures()
-                ->createMany(Collection::times($data['quantity'], fn () => $data))
+                ->createMany(
+                    Collection::times(
+                        $data['quantity'],
+                        fn () => Arr::except($data, ['quantity', 'item'])
+                    )
+                )
                 ->toArray();
 
             $this->modelItem->update(['last_signed_at' => now()]);
@@ -144,7 +150,7 @@ class Manage extends Component
                 $current->update(['last_signed_at' => null]);
             }
 
-            return $this->signature->update($data);
+            return $this->signature->update(Arr::except($data, ['quantity', 'item']));
         });
     }
 
