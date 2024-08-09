@@ -1,3 +1,5 @@
 {
+    "frontend.categories": "{0} No items in this category|{1} 1 item|[2,*] :count items",
+    "frontend.quoted.alert" : "When signing :quantity unit(s) the total value that must be delivered as a gift will be the value of :price because this item has quotas <b class=\"underline decoration-dotted\">(available quotas: :total)</b>",
     "signatures.quote": "<b>This item has quotas (:price)</b> :quantity unit, will cost :price_quote|<b>This item has quotas (:price)</b> :quantity unit, will cost :price_quote"
 }
