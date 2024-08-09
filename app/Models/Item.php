@@ -8,7 +8,7 @@ use App\Casts\FloatToIntCast;
 use App\Models\Trait\Search;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\{Model, Relations\HasMany, SoftDeletes};
+use Illuminate\Database\Eloquent\{Builder, Model, Relations\HasMany, SoftDeletes};
 
 class Item extends Model
 {
@@ -50,7 +50,7 @@ class Item extends Model
         ];
     }
 
-    public function scopeActive($query): void
+    public function scopeActive(Builder $query): void
     {
         $query->where('is_active', true);
     }

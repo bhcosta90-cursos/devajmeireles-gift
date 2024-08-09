@@ -6,12 +6,45 @@ use App\Livewire\Admin\Signatures\Manage;
 use App\Models\{Item, Signature};
 
 use function Pest\Laravel\{assertDatabaseCount, assertDatabaseHas};
+
 use function Pest\Livewire\livewire;
 
-describe('has livewire - admin - signatures - signatures - manage -> page', function () {
+use Tests\Support\ValidateData;
+
+describe('has livewire - admin - signatures - signatures - manage -> component', function () {
     beforeEach(function () {
         mockAuthentication();
         $this->item = Item::factory()->create(['quantity' => 6]);
+    });
+
+    it('validates signature fields correctly', function () {
+        $data = [
+            ValidateData::make()
+                ->field('name', '', 'required')
+                ->field('item', '', 'required')
+                ->field('phone', '', 'required')
+                ->field('delivery', '', 'required')
+                ->run(),
+
+            ValidateData::make()
+                ->field('name', 'a', 'min:2')
+                ->run(),
+
+            ValidateData::make()
+                ->field('item', '0', 'exists:items,id')
+                ->run(),
+
+            ValidateData::make()
+                ->field('quantity', '0', 'min:1')
+                ->run(),
+
+            ValidateData::make()
+                ->field('observation', str_repeat('a', 201), 'max:200')
+                ->run(),
+        ];
+
+        livewire(Manage::class)
+            ->toBeValidateErrors($data);
     });
 
     it('creates a new signature and saves it correctly', function () {

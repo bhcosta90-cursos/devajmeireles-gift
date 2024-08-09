@@ -11,7 +11,7 @@ use function Pest\Livewire\livewire;
 
 use Tests\Support\ValidateData;
 
-describe('has livewire - admin - categories - manage -> page', function () {
+describe('has livewire - admin - categories - manage -> component', function () {
     beforeEach(fn () => mockAuthentication());
 
     it('validates category fields correctly', function () {

@@ -11,7 +11,7 @@ use function Pest\Livewire\livewire;
 
 use Tests\Support\ValidateData;
 
-describe('has livewire - admin - items - manage -> page', function () {
+describe('has livewire - admin - items - manage -> component', function () {
     beforeEach(fn () => mockAuthentication());
 
     it('validates item fields correctly', function () {

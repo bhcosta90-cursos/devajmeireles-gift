@@ -5,7 +5,7 @@ declare(strict_types = 1);
 use Illuminate\Support\Number;
 
 if (!function_exists('currency')) {
-    function currency($value, ?string $language = null): string | false
+    function currency(int | float $value, ?string $language = null): string | false
     {
         $language = match (app()->getLocale()) {
             'en'    => 'USD',

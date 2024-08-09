@@ -22,8 +22,8 @@ class Filter extends Component
     {
         $this->authorize('manage', Signature::class);
 
-        $this->search['categories'] = request('search.categories', []);
         $this->search['items']      = request('search.items', []);
+        $this->search['categories'] = request('search.categories', []);
         $this->search['created_at'] = request('search.created_at', [
             Signature::orderBy('created_at')->first()?->created_at->format('Y-m-d') ?: now()->format('Y-m-d'),
             now()->format('Y-m-d'),
@@ -37,7 +37,6 @@ class Filter extends Component
 
     public function removeFilters(): void
     {
-
         $this->dispatch('filter::advanced', $this->search = collect($this->search)
             ->map(fn () => [])
             ->merge(['created_at' => $this->search['created_at']])

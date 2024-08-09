@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Sequence;
 use function Pest\Laravel\{assertSoftDeleted, get};
 use function Pest\Livewire\livewire;
 
-describe('has livewire - admin - items -> page', function () {
+describe('has livewire - admin - items -> component', function () {
     beforeEach(fn () => mockAuthentication());
 
     it('can render component', function () {

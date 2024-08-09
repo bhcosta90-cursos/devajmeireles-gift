@@ -18,8 +18,10 @@ class SearchFilter
         return $query->search([
             'name' => [$this->request->get('search')],
         ])
-            ->when($selected = $this->request->get('selected'), fn ($query) => $query->whereIn('id', json_decode($selected)))
-            ->limit(30)
+            ->when(
+                $selected = $this->request->get('selected'),
+                fn (Builder $query) => $query->whereIn('id', json_decode($selected))
+            )->limit(30)
             ->get()
             ->map(fn (Model $item) => [
                 'id'   => $item->{$id},
