@@ -44,7 +44,8 @@ class Signature extends Component
     }
 
     #[Computed]
-    public function isPresence(): bool{
+    public function isPresence(): bool
+    {
         return (bool) Settings::get('covert_signature_to_presence');
     }
 }
