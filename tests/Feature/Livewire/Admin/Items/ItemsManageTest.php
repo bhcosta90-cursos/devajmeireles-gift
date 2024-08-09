@@ -4,10 +4,12 @@ declare(strict_types = 1);
 
 use App\Livewire\Admin\Items\Manage;
 use App\Models\{Category, Item};
-use Tests\Support\ValidateData;
 
 use function Pest\Laravel\{assertDatabaseCount, assertDatabaseHas};
+
 use function Pest\Livewire\livewire;
+
+use Tests\Support\ValidateData;
 
 describe('has livewire - admin - items - manage -> component', function () {
     beforeEach(fn () => mockAuthentication());

@@ -16,7 +16,7 @@ class Card extends Component
 {
     public CardType $card;
 
-    public $quantity = 0;
+    public int $quantity = 0;
 
     public function render(): View
     {

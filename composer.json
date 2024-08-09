@@ -62,11 +62,14 @@
             "@php artisan migrate --graceful --ansi"
         ],
         "test": [
-            "./vendor/bin/phpstan analyse --memory-limit=2G",
-            "./vendor/bin/pint --test",
-            "./vendor/bin/pest --type-coverage --memory-limit=2G",
-            "composer run test:parallel"
+            "composer run test:parallel",
+            "composer run test:formatter",
+            "composer run test:type",
+            "composer run test:analyze"
         ],
+        "test:formatter": "./vendor/bin/pint --test",
+        "test:analyze": "./vendor/bin/phpstan analyse --memory-limit=2G",
+        "test:type": "./vendor/bin/pest --type-coverage --min=100 --memory-limit=2G",
         "test:parallel": "./vendor/bin/pest --parallel --processes=10"
     },
     "extra": {
