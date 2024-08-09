@@ -10,9 +10,9 @@
         <div class="space-y-4">
             <x-ui.input label="Name" wire:model="name" />
             <x-filter.item wire:model.live="item" />
-            <div @class(['grid gap-4', 'grid-cols-2' => blank($modelItem)])>
+            <div @class(['grid gap-4', 'grid-cols-2' => blank($signature)])>
                 <x-ui.input label="Cell phone" x-mask="(99) 99999-9999" wire:model="phone" />
-                @empty($modelItem)
+                @empty($signature)
                     <x-ui.input.number label="Quantity" min="1" wire:model.change="quantity" />
                 @endif
             </div>

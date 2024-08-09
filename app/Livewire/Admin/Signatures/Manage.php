@@ -142,7 +142,10 @@ class Manage extends Component
                 )
                 ->toArray();
 
-            $this->modelItem->update(['last_signed_at' => now()]);
+            $this->modelItem->update([
+                'is_active'      => $this->modelItem->available(),
+                'last_signed_at' => now(),
+            ]);
 
             return $response;
         });
@@ -175,9 +178,17 @@ class Manage extends Component
     protected function rules(): array
     {
         return [
-            'name'        => 'required|min:2',
-            'item'        => ['required', Rule::exists('items', 'id')],
-            'quantity'    => 'required|numeric|min:1',
+            'name' => 'required|min:2',
+            'item' => [
+                'required',
+                Rule::exists('items', 'id')->where('is_active', true),
+            ],
+            'quantity' => [
+                'required',
+                'numeric',
+                'min:1',
+                'max:' . $this->modelItem->availableQuantity(),
+            ],
             'phone'       => 'required',
             'observation' => 'nullable|max:200',
             'delivery'    => ['required', Rule::enum(DeliveryType::class)],
