@@ -62,7 +62,7 @@
             "@php artisan migrate --graceful --ansi"
         ],
         "test": [
-            "composer run test:parallel",
+            "test:coverage",
             "composer run test:formatter",
             "composer run test:type",
             "composer run test:analyze"
@@ -70,7 +70,8 @@
         "test:formatter": "./vendor/bin/pint --test",
         "test:analyze": "./vendor/bin/phpstan analyse --memory-limit=2G",
         "test:type": "./vendor/bin/pest --type-coverage --min=100 --memory-limit=2G",
-        "test:parallel": "./vendor/bin/pest --parallel --processes=10"
+        "test:parallel": "./vendor/bin/pest --parallel --processes=10",
+        "test:coverage": "./vendor/bin/pest --parallel --processes=10 --coverage --min=50"
     },
     "extra": {
         "laravel": {
