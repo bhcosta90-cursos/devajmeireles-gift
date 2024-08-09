@@ -29,7 +29,6 @@
             @if($delivery && $this->isPresence && \App\Enums\DeliveryType::from($delivery) === \App\Enums\DeliveryType::InPerson)
                 <div class="col-span-full">
                     <x-ui.input label="Number of people"
-                        mask="(##) #####-####"
                         placeholder="Tell us how many people are going to our event"
                     />
                 </div>
@@ -77,7 +76,7 @@
         <slot:footer>
             <div class="flex justify-end gap-x-4 pt-4">
                 <div class="flex">
-                    <x-ui.button flat label="Cancel" x-on:click="close"/>
+                    <x-ui.button flat label="Cancel" x-on:click="$wire.set('modal', false)"/>
                     <x-ui.button primary label="To sign" wire:click="create"/>
                 </div>
             </div>

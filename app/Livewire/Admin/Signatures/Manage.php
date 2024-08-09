@@ -7,7 +7,8 @@ namespace App\Livewire\Admin\Signatures;
 use App\Enums\DeliveryType;
 use App\Livewire\Traits\HasDialog;
 use App\Livewire\Traits\Permission\HasPermissionCreate;
-use App\Models\{Item, Signature};
+use App\Models\{Item, Presence, Signature};
+use App\Services\Facades\Settings;
 use Arr;
 use DB;
 use Illuminate\Contracts\View\View;
@@ -40,6 +41,8 @@ class Manage extends Component
     public ?string $observation = null;
 
     public ?int $delivery = null;
+
+    public ?int $presence = null;
 
     public function mount(): void
     {
@@ -112,14 +115,29 @@ class Manage extends Component
         return DeliveryType::toSelect();
     }
 
+    #[Computed]
+    public function isPresence(): bool
+    {
+        return (bool) Settings::get('covert_signature_to_presence');
+    }
+
     protected function createSignature(array $data): array
     {
         return DB::transaction(function () use ($data) {
+
+            if ($this->isPresence && $this->delivery === DeliveryType::InPerson->value && $data['presence'] > 0) {
+                $data['presence_id'] = Presence::create([
+                    'name'         => $data['name'],
+                    'quantity'     => $data['presence'],
+                    'is_confirmed' => true,
+                ])->id;
+            }
+
             $response = $this->modelItem->signatures()
                 ->createMany(
                     Collection::times(
                         $data['quantity'],
-                        fn () => Arr::except($data, ['quantity', 'item'])
+                        fn () => Arr::except($data, ['quantity', 'item', 'presence'])
                     )
                 )
                 ->toArray();
@@ -150,7 +168,7 @@ class Manage extends Component
                 $current->update(['last_signed_at' => null]);
             }
 
-            return $this->signature->update(Arr::except($data, ['quantity', 'item']));
+            return $this->signature->update(Arr::except($data, ['quantity', 'item', 'presence']));
         });
     }
 
@@ -163,6 +181,15 @@ class Manage extends Component
             'phone'       => 'required',
             'observation' => 'nullable|max:200',
             'delivery'    => ['required', Rule::enum(DeliveryType::class)],
+            'presence'    => [
+                'nullable',
+                Rule::requiredIf(
+                    fn () => $this->isPresence && $this->delivery === DeliveryType::InPerson->value && blank($this->signature)
+                ),
+                'min:0',
+                'max:20',
+                'numeric',
+            ],
         ];
     }
 
@@ -170,6 +197,13 @@ class Manage extends Component
     {
         return [
             Signature::class,
+        ];
+    }
+
+    protected function messages(): array
+    {
+        return [
+            'presence.required' => __('For the type of delivery as in-person, the number of people at the event field is mandatory to inform at least 0'),
         ];
     }
 }

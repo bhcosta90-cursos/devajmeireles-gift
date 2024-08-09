@@ -31,7 +31,7 @@ class Signature extends Component
     }
 
     #[On('frontend::signature')]
-    public function load(Item $item)
+    public function load(Item $item): void
     {
         $this->item  = $item;
         $this->modal = true;

@@ -38,6 +38,8 @@
     "See a model of the desired item by clicking here": "Veja um modelo do item desejado clicando aqui",
     "Signatures": "Assinaturas",
     "Categories": "Categorias",
+    "Number of people going to the event": "Número de pessoas indo ao evento",
+    "For the type of delivery as in-person, the number of people at the event field is mandatory to inform at least 0": "Para o tipo de entrega como presencial, o campo quantidade de pessoas no evento é obrigatório informar no mínimo 0",
     "Create category": "Criar categoria",
     "Category name": "Nome da categoria",
     "No results found.": "Nenhum resultado encontrado.",
