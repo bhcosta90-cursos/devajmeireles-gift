@@ -75,10 +75,8 @@
         </div>
         <slot:footer>
             <div class="flex justify-end gap-x-4 pt-4">
-                <div class="flex">
-                    <x-ui.button flat label="Cancel" x-on:click="$wire.set('modal', false)"/>
-                    <x-ui.button primary label="To sign" wire:click="create"/>
-                </div>
+                <x-ui.button flat label="Cancel" x-on:click="$wire.set('modal', false)"/>
+                <x-ui.button primary label="To sign" wire:click="create"/>
             </div>
         </slot:footer>
     </x-ui.modal>

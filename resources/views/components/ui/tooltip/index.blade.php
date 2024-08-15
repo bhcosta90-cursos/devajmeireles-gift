@@ -1,2 +1,2 @@
 @props(['text'])
-<x-tooltip :text="__($text)" />
+<x-ts-tooltip :text="__($text)" />
