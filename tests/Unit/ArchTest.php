@@ -16,5 +16,5 @@ arch('facades')
 
 arch('models')
     ->expect('App\Models')
-    ->toExtend('Illuminate\Database\Eloquent\Model')
+    ->toExtend(Illuminate\Database\Eloquent\Model::class)
     ->ignoring('App\Models\Trait');
