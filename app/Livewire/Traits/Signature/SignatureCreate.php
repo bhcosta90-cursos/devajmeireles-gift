@@ -6,12 +6,16 @@ namespace App\Livewire\Traits\Signature;
 
 use App\Enums\DeliveryType;
 use App\Livewire\Frontend\Signature;
-use App\Models\{Item, Presence};
+use App\Models\{Item, Presence, Signature as SignatureModel};
 use App\Services\Facades\Settings;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Computed;
 
+/**
+ * @property SignatureModel|null $signature
+ * @property-read bool $isPresence
+ */
 trait SignatureCreate
 {
     abstract protected function item(): ?Item;
@@ -27,7 +31,7 @@ trait SignatureCreate
     ): array {
         $idPresence = null;
 
-        if ($delivery === DeliveryType::InPerson->value && $presence > 0 && $this->isPresence()) {
+        if ($delivery === DeliveryType::InPerson->value && $presence > 0 && $isPresence = $this->isPresence()) {
             $idPresence = Presence::create([
                 'name'         => $name,
                 'quantity'     => $presence,
