@@ -62,7 +62,7 @@
             "@php artisan migrate --graceful --ansi"
         ],
         "test": [
-            "test:coverage",
+            "composer run test:coverage",
             "composer run test:formatter",
             "composer run test:type",
             "composer run test:analyze"
