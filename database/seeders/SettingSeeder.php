@@ -13,12 +13,12 @@ class SettingSeeder extends Seeder
     {
         $settings = [
             [
-                'key'   => 'titulo',
+                'key'   => 'title',
                 'value' => 'Casamento de João & Maria',
                 'type'  => 'text',
             ],
             [
-                'key'   => 'subtitulo',
+                'key'   => 'subtitle',
                 'value' => 'O dia mais feliz de nossas vidas',
                 'type'  => 'textarea',
             ],
@@ -28,37 +28,37 @@ class SettingSeeder extends Seeder
                 'type'  => 'text',
             ],
             [
-                'key'   => 'data',
+                'key'   => 'date',
                 'value' => now()->addWeek()->format('Y-m-d'),
                 'type'  => 'date',
             ],
             [
-                'key'   => 'hora',
+                'key'   => 'hour',
                 'value' => now()->addWeek()->format('H:i'),
                 'type'  => 'time',
             ],
             [
-                'key'   => 'contato',
+                'key'   => 'contact',
                 'value' => '(11) 99999-9999',
                 'type'  => 'phone',
             ],
             [
-                'key'   => 'rodape',
+                'key'   => 'footer',
                 'value' => 'Laravel',
                 'type'  => 'text',
             ],
             [
-                'key'   => 'recebimento_evento',
+                'key'   => 'event_receipt',
                 'value' => 'Recebemos a assinatura do seu presente! Como você escolheu entregar o presente no evento gostaríamos de te lembrar os detalhes sobre o evento. O evento ocorrerá em {%local%}, as {%hora%} do dia {%data%}. Esperamos por você. Obrigado!',
                 'type'  => 'textarea',
             ],
             [
-                'key'   => 'recebimento_remotamente',
+                'key'   => 'remove_receiving',
                 'value' => 'Recebemos a assinatura do seu presente! Entraremos em contato com você pelo número informado em breve. Obrigado!',
                 'type'  => 'textarea',
             ],
             [
-                'key'   => 'converter_assinaturas_em_presenca',
+                'key'   => 'covert_signature_to_presence',
                 'value' => 1,
                 'type'  => 'boolean',
             ],

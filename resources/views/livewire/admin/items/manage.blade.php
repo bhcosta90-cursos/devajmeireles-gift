@@ -7,7 +7,9 @@
         <div class="space-y-4">
             <div class="grid grid-cols-2">
                 <x-ui.toggle wire:model="active" />
-                <x-ui.toggle wire:model.change="quotable" label="Quota" />
+                @empty($item)
+                    <x-ui.toggle wire:model.change="quotable" label="Quota" />
+                @endif
             </div>
             <div class="grid grid-cols-2 gap-4">
                 <x-filter.category wire:model="category" />

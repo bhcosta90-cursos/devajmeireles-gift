@@ -100,19 +100,21 @@ Testable::macro('assertConfirmation', function (mixed $params, string $action) {
     return $this;
 });
 
-Testable::macro('toBeValidateErrors', function (array $datas, string $action = 'save') {
+Testable::macro('toBeValidateErrors', function (array $datas, string $action = 'save', bool $debug = false) {
     foreach ($datas as $data) {
         $rules = [];
 
         foreach ($data as $key => $item) {
-            $rules[$key] = $item['rule'];
+            if ($item['rule'] !== null) {
+                $rules[$key] = $item['rule'];
+            }
             /** @var Testable|Component $this */
             $this->set($key, $item['value']);
         }
 
         try {
             $this->call($action)
-                ->assertHasErrors($rules);
+                ->assertHasErrors($rules, $debug);
         } catch (Throwable $e) {
             dump($data);
 

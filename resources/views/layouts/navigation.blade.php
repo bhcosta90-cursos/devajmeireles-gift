@@ -17,15 +17,15 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    @can('viewAny', Item::class)
-                        <x-nav-link :href="route('admin.items')" :active="request()->routeIs('admin.items')">
-                            {{ __('Items') }}
-                        </x-nav-link>
-                    @endcan
-
                     @can('viewAny', Category::class)
                         <x-nav-link :href="route('admin.categories')" :active="request()->routeIs('admin.categories')">
                             {{ __('Categories') }}
+                        </x-nav-link>
+                    @endcan
+
+                    @can('viewAny', Item::class)
+                        <x-nav-link :href="route('admin.items')" :active="request()->routeIs('admin.items')">
+                            {{ __('Items') }}
                         </x-nav-link>
                     @endcan
 

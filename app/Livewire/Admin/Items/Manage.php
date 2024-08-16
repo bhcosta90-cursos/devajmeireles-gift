@@ -115,7 +115,7 @@ class Manage extends Component
             'quantity'    => ['required', 'integer', 'min:0'],
             'price'       => ['nullable', new RequiredIf($this->quotable), 'numeric', 'min:0'],
             'active'      => ['required', 'boolean'],
-            'quotable'    => ['required', 'boolean'],
+            'quotable'    => ['nullable', 'boolean', new RequiredIf(!$this->item)],
         ];
     }
 

@@ -6,7 +6,7 @@
     <div class="space-y-4">
         <div class="flex justify-between items-end gap-8">
             <div class="flex-grow">
-                <x-ui.tag wire:model.live="search.name" label="Category Name"  />
+                <x-ui.tag wire:model.live="search.name" label="Category name"  />
             </div>
             <livewire:admin.categories.manage />
         </div>

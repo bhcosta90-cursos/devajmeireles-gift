@@ -11,8 +11,6 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
-        <x-ts-dialog />
-        <x-ts-toast />
         @include('layouts.navigation')
 
         <!-- Page Heading -->
@@ -33,4 +31,6 @@
         </div>
         @livewireScripts
     </body>
+    <x-ts-dialog />
+    <x-ts-toast />
 </html>

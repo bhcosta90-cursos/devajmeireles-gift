@@ -19,6 +19,7 @@ class Signature extends Model
 
     protected $fillable = [
         'name',
+        'presence_id',
         'item_id',
         'delivery',
         'created_at',

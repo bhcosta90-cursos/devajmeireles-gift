@@ -1,8 +1,8 @@
 <div>
     <x-ui.slide
-        label="Create Category"
+        label="Create category"
         :permission="$this->buttonCreate"
-        :title="$category ? 'Edit Category' : 'Create Category'"
+        :title="$category ? 'Edit Category' : 'Create category'"
     >
         <div class="space-y-4">
             <x-ui.toggle wire:model="active" />
