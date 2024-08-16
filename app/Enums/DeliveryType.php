@@ -19,7 +19,7 @@ enum DeliveryType: int
         };
     }
 
-    public function tip()
+    public function tip(): string
     {
         return match ($this) {
             self::InPerson => __('Indicates that you will attend the event'),
