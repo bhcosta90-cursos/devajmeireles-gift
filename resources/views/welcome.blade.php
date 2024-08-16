@@ -4,7 +4,7 @@
         <main class="isolate">
             @if (auth()->check())
                 <div class="p-2">
-                    <x-ui.button.circle sm primary href="{{ route('admin.dashboard') }}">
+                    <x-ui.button.circle sm primary href="{{ route('dashboard') }}">
                         <x-heroicon-s-arrow-up-right class="h-6 w-6 text-white" />
                     </x-ui.button.circle>
                 </div>

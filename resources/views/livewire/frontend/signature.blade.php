@@ -1,4 +1,4 @@
-<div class="flex justify-end gap-1">
+<form class="flex justify-end gap-1">
     <x-ui.modal title="New Signature">
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div class="col-span-full">
@@ -12,13 +12,16 @@
                 <x-ui.input label="Cell phone"
                    mask="(##) #####-####"
                    placeholder="Insert your cell phone here"
+                    wire:model="phone"
                 />
             </div>
 
-            <x-ui.input label="Selected Item"
-                 value="{{ $item?->name }}"
-                 disabled
+            <x-ui.input
+                label="Selected Item"
+                value="{{ $modelItem?->name }}"
+                disabled
             />
+
             <div class="col-span-1">
                 <x-ui.select wire:model.live="delivery" :options="$this->getDelivery" label="Tipo de Entrega" />
                 @if ($delivery)
@@ -34,31 +37,32 @@
                 </div>
             @endif
 
-            @if ($item && $item->availableQuantity() > 1)
+            @if ($item && $modelItem->availableQuantity() > 1)
                 <div class="col-span-full space-y-2">
                     <x-ui.input.number label="Quantity"
                                      wire:model.change="quantity"
                                      :min="1"
-                                     :max="$item->availableQuantity()"
+                                     :max="$modelItem->availableQuantity()"
                     />
                     <p class="text-sm font-semibold underline decoration-dotted text-primary">
-                        {{ $item->availableQuantity() }} @lang('available quotas')
+                        {{ $modelItem->availableQuantity() }} @lang('available quotas')
                     </p>
                 </div>
             @endif
-            @if ($item && $item->is_quotable)
-                @php($available = $item->availableQuantity())
+            @if ($modelItem && $modelItem->is_quotable)
+                @php($available = $modelItem->availableQuantity())
                 <div class="col-span-full space-y-2">
                     <x-ui.alert outline justify>
                         @lang('frontend.quoted.alert', [
                             'quantity' => $quantity,
-                            'price' => currency($item->priceQuoted($quantity, false)),
+                            'price' => currency($modelItem->priceQuoted($quantity, false)),
                             'total' => $available,
                         ])
                     </x-ui.alert>
-                    @if ($item->reference)
+                    @if ($modelItem->reference)
                         <div class="flex justify-center items-center">
-                            <a href="{{ $item->reference }}" target="_blank" class="text-sm text-primary font-semibold">
+                            <a href="{{ $modelItem->reference }}" target="_blank" class="text-sm text-primary
+                            font-semibold">
                                 @lang('See a model of the desired item by clicking here')
                             </a>
                             <x-heroicon-s-arrow-up-right class="h-4 w-4 text-primary" />
@@ -80,4 +84,4 @@
             </div>
         </slot:footer>
     </x-ui.modal>
-</div>
+</form>

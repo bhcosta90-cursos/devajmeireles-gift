@@ -7,13 +7,12 @@ namespace App\Livewire\Admin\Signatures;
 use App\Enums\DeliveryType;
 use App\Livewire\Traits\HasDialog;
 use App\Livewire\Traits\Permission\HasPermissionCreate;
-use App\Models\{Item, Presence, Signature};
-use App\Services\Facades\Settings;
+use App\Livewire\Traits\Signature\SignatureCreate;
+use App\Models\{Item, Signature};
 use Arr;
 use DB;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
-use Illuminate\Validation\{Rule, ValidationException};
+use Illuminate\Validation\{ValidationException};
 use Livewire\Attributes\{Computed, On};
 use Livewire\Component;
 
@@ -21,6 +20,11 @@ class Manage extends Component
 {
     use HasDialog;
     use HasPermissionCreate;
+
+    use SignatureCreate {
+        createSignature as createSignature;
+        rulesSignature as rules;
+    }
 
     public bool $slide = false;
 
@@ -99,7 +103,15 @@ class Manage extends Component
 
         $response = $this->signature
             ? $this->updateSignature($data)
-            : $this->createSignature($data);
+            : $this->createSignature(
+                item: $this->modelItem,
+                name: $data['name'],
+                phone: $data['phone'],
+                delivery: $data['delivery'],
+                quantity: $data['quantity'],
+                observation: $data['observation'],
+                presence: $data['presence'] ?? 0,
+            );
 
         $this->reset();
         $this->dispatch('manage::list');
@@ -113,42 +125,6 @@ class Manage extends Component
     public function getDelivery(): array
     {
         return DeliveryType::toSelect();
-    }
-
-    #[Computed]
-    public function isPresence(): bool
-    {
-        return (bool) Settings::get('covert_signature_to_presence');
-    }
-
-    protected function createSignature(array $data): array
-    {
-        return DB::transaction(function () use ($data) {
-
-            if ($this->isPresence && $this->delivery === DeliveryType::InPerson->value && $data['presence'] > 0) {
-                $data['presence_id'] = Presence::create([
-                    'name'         => $data['name'],
-                    'quantity'     => $data['presence'],
-                    'is_confirmed' => true,
-                ])->id;
-            }
-
-            $response = $this->modelItem->signatures()
-                ->createMany(
-                    Collection::times(
-                        $data['quantity'],
-                        fn () => Arr::except($data, ['quantity', 'item', 'presence'])
-                    )
-                )
-                ->toArray();
-
-            $this->modelItem->update([
-                'is_active'      => $this->modelItem->available(),
-                'last_signed_at' => now(),
-            ]);
-
-            return $response;
-        });
     }
 
     protected function updateSignature(array $data): bool
@@ -175,35 +151,6 @@ class Manage extends Component
         });
     }
 
-    protected function rules(): array
-    {
-        return [
-            'name' => 'required|min:2',
-            'item' => [
-                'required',
-                Rule::exists('items', 'id')->where('is_active', true),
-            ],
-            'quantity' => [
-                'required',
-                'numeric',
-                'min:1',
-                'max:' . $this->modelItem->availableQuantity(),
-            ],
-            'phone'       => 'required',
-            'observation' => 'nullable|max:200',
-            'delivery'    => ['required', Rule::enum(DeliveryType::class)],
-            'presence'    => [
-                'nullable',
-                Rule::requiredIf(
-                    fn () => $this->isPresence && $this->delivery === DeliveryType::InPerson->value && blank($this->signature)
-                ),
-                'min:0',
-                'max:20',
-                'numeric',
-            ],
-        ];
-    }
-
     protected function getCreatePermissionParams(): array
     {
         return [
@@ -216,5 +163,10 @@ class Manage extends Component
         return [
             'presence.required' => __('For the type of delivery as in-person, the number of people at the event field is mandatory to inform at least 0'),
         ];
+    }
+
+    protected function item(): Item
+    {
+        return $this->modelItem;
     }
 }

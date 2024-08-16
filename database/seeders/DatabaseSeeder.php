@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CategorySeeder::class,
             ItemSeeder::class,
-            SignatureSeeder::class,
+            #SignatureSeeder::class,
             SettingSeeder::class,
         ]);
     }
