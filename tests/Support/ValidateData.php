@@ -8,7 +8,7 @@ class ValidateData
 {
     public array $data = [];
 
-    public function field(string $field, mixed $value, string | array $rule): self
+    public function field(string $field, mixed $value, null | string | array $rule = null): self
     {
         if (is_string($rule)) {
             $rule = [$rule];

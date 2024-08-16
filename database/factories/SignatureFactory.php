@@ -14,18 +14,20 @@ class SignatureFactory extends Factory
 
     public function definition(): array
     {
-        $name     = $this->faker->name();
-        $delivery = $this->faker->randomElement(DeliveryType::cases());
-
         return [
             'item_id'     => Item::factory(),
-            'presence_id' => $delivery === DeliveryType::InPerson
-                ? Presence::factory()->create(['name' => $name])
-                : null,
-            'name'        => $name,
-            'delivery'    => $delivery,
+            'name'        => $this->faker->name(),
+            'delivery'    => DeliveryType::Remotely,
             'phone'       => $this->faker->phoneNumber(),
             'observation' => $this->faker->word(),
         ];
+    }
+
+    public function withPresence(): self
+    {
+        return $this->state(fn ($state) => [
+            'presence_id' => Presence::factory()->create(['name' => $state['name']]),
+            'delivery'    => DeliveryType::InPerson,
+        ]);
     }
 }

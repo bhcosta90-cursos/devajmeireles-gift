@@ -165,7 +165,7 @@ class Manage extends Component
         ];
     }
 
-    protected function item(): Item
+    protected function item(): ?Item
     {
         return $this->modelItem;
     }

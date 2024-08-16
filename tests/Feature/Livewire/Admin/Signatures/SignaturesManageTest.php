@@ -22,7 +22,6 @@ describe('has livewire - admin - signatures - signatures - manage -> component',
             ValidateData::make()
                 ->field('name', '', 'required')
                 ->field('item', '', 'required')
-                ->field('phone', '', 'required')
                 ->field('delivery', '', 'required')
                 ->run(),
 
@@ -36,6 +35,11 @@ describe('has livewire - admin - signatures - signatures - manage -> component',
 
             ValidateData::make()
                 ->field('quantity', '0', 'min:1')
+                ->run(),
+
+            ValidateData::make()
+                ->field('modelItem', $this->item)
+                ->field('quantity', '7', 'max:6')
                 ->run(),
 
             ValidateData::make()
@@ -169,6 +173,6 @@ describe('has livewire - admin - signatures - signatures - manage -> component',
                 'observation' => $newSignature->observation,
             ])
             ->assertSet('modelItem.id', $item->id)
-            ->assertSave(errors: ['item']);
+            ->assertSave(errors: ['quantity']);
     });
 });

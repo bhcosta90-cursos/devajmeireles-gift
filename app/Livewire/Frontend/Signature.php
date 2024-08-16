@@ -90,7 +90,7 @@ class Signature extends Component
         return (bool) Settings::get('covert_signature_to_presence');
     }
 
-    protected function item(): Item
+    protected function item(): ?Item
     {
         return $this->modelItem;
     }

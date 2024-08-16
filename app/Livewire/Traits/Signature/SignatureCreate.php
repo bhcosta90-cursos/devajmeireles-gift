@@ -14,7 +14,7 @@ use Livewire\Attributes\Computed;
 
 trait SignatureCreate
 {
-    abstract protected function item(): Item;
+    abstract protected function item(): ?Item;
 
     public function createSignature(
         Item $item,
@@ -69,7 +69,7 @@ trait SignatureCreate
                 'required',
                 'numeric',
                 'min:1',
-                'max:' . $this->item()->availableQuantity(),
+                'max:' . ($this->item()?->availableQuantity() ?: '0'),
             ],
             'phone'       => Rule::when($this instanceof Signature, ['required'], ['nullable']),
             'observation' => 'nullable|max:200',
