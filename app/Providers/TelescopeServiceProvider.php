@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace App\Providers;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Laravel\Telescope\{IncomingEntry, Telescope, TelescopeApplicationServiceProvider};
 
 class TelescopeServiceProvider extends TelescopeApplicationServiceProvider

@@ -5,8 +5,8 @@ declare(strict_types = 1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use Auth;
 use Illuminate\Http\{RedirectResponse, Request};
-use Illuminate\Support\Facades\{Auth, Redirect};
 use Illuminate\View\View;
 
 class ProfileController extends Controller
