@@ -6,9 +6,9 @@ namespace App\Models;
 
 use App\Models\Trait\Search;
 use Cache;
-use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 
 class Signature extends Model
 {
