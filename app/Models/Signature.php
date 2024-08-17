@@ -4,12 +4,11 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
-use App\Enums\DeliveryType;
 use App\Models\Trait\Search;
 use Cache;
+use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 
 class Signature extends Model
 {
@@ -21,14 +20,9 @@ class Signature extends Model
         'name',
         'presence_id',
         'item_id',
-        'delivery',
         'created_at',
         'observation',
         'phone',
-    ];
-
-    public $casts = [
-        'delivery' => DeliveryType::class,
     ];
 
     protected const CACHE_AVATAR = 'v1';

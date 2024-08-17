@@ -61,6 +61,7 @@ class Manage extends Component
     public function createItem(): void
     {
         $this->reset();
+        $this->resetValidation();
         $this->slide = true;
     }
 
@@ -76,7 +77,6 @@ class Manage extends Component
         $this->item        = $signature->item_id;
         $this->phone       = $signature->phone;
         $this->observation = $signature->observation;
-        $this->delivery    = $signature->delivery->value;
 
         $this->title = 'Edit Signature';
         $this->slide = true;
@@ -101,10 +101,8 @@ class Manage extends Component
                 item: $this->modelItem,
                 name: $data['name'],
                 phone: $data['phone'],
-                delivery: $data['delivery'],
                 quantity: $data['quantity'],
                 observation: $data['observation'],
-                presence: $data['presence'] ?? 0,
             );
 
         $this->reset();

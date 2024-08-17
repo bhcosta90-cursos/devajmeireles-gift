@@ -4,13 +4,10 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Traits\Signature;
 
-use App\Enums\DeliveryType;
 use App\Livewire\Frontend\Signature;
-use App\Models\{Item, Presence, Signature as SignatureModel};
-use App\Services\Facades\Settings;
+use App\Models\{Item, Signature as SignatureModel};
 use Illuminate\Support\Collection;
 use Illuminate\Validation\Rule;
-use Livewire\Attributes\Computed;
 
 /**
  * @property SignatureModel|null $signature
@@ -24,31 +21,17 @@ trait SignatureCreate
         Item $item,
         string $name,
         string $phone,
-        int $delivery,
         int $quantity,
         string $observation,
-        int $presence,
     ): array {
-        $idPresence = null;
-
-        if ($delivery === DeliveryType::InPerson->value && $presence > 0 && $this->isPresence()) {
-            $idPresence = Presence::create([
-                'name'         => $name,
-                'quantity'     => $presence,
-                'is_confirmed' => true,
-            ])->id;
-        }
-
         $response = $item->signatures()
             ->createMany(
                 Collection::times(
                     $quantity,
                     fn () => [
-                        'presence_id' => $idPresence,
                         'phone'       => $phone,
                         'observation' => $observation,
                         'name'        => $name,
-                        'delivery'    => $delivery,
                     ]
                 )
             )->toArray();
@@ -77,22 +60,6 @@ trait SignatureCreate
             ],
             'phone'       => Rule::when($this instanceof Signature, ['required'], ['nullable']),
             'observation' => 'nullable|max:200',
-            'delivery'    => ['required', Rule::enum(DeliveryType::class)],
-            'presence'    => [
-                'nullable',
-                Rule::requiredIf(
-                    fn () => $this->isPresence && $this->delivery === DeliveryType::InPerson->value && blank($this->signature)
-                ),
-                'min:0',
-                'max:20',
-                'numeric',
-            ],
         ];
-    }
-
-    #[Computed]
-    public function isPresence(): bool
-    {
-        return (bool) Settings::get('covert_signature_to_presence');
     }
 }

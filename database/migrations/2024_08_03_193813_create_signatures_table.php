@@ -12,10 +12,8 @@ return new class () extends Migration {
         Schema::create('signatures', function (Blueprint $table) {
             $table->id();
             $table->foreignId('item_id');
-            $table->foreignId('presence_id')->nullable();
             $table->string('name');
             $table->string('phone')->nullable();
-            $table->smallInteger('delivery');
             $table->string('observation')->nullable();
             $table->timestamps();
             $table->softDeletes();

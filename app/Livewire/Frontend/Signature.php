@@ -64,10 +64,8 @@ class Signature extends Component
             item: $this->modelItem,
             name: $data['name'],
             phone: $data['phone'],
-            delivery: $data['delivery'],
             quantity: $data['quantity'],
             observation: $data['observation'],
-            presence: $data['presence'] ?? 0,
         );
 
         $this->reset();

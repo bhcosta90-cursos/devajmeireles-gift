@@ -57,11 +57,6 @@ class SettingSeeder extends Seeder
                 'value' => 'Recebemos a assinatura do seu presente! Entraremos em contato com você pelo número informado em breve. Obrigado!',
                 'type'  => 'textarea',
             ],
-            [
-                'key'   => 'covert_signature_to_presence',
-                'value' => 1,
-                'type'  => 'boolean',
-            ],
         ];
 
         $newArray = [];

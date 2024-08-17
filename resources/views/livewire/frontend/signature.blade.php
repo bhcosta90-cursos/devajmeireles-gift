@@ -22,32 +22,15 @@
                 disabled
             />
 
-            <div class="col-span-1">
-                <x-ui.select wire:model.live="delivery" :options="$this->getDelivery" label="Tipo de Entrega" />
-                @if ($delivery)
-                    <p class="text-sm font-semibold text-primary">{{ \App\Enums\DeliveryType::from($delivery)->tip() }}</p>
-                @endif
-            </div>
-
-            @if($delivery && $this->isPresence && \App\Enums\DeliveryType::from($delivery) === \App\Enums\DeliveryType::InPerson)
-                <div class="col-span-full">
-                    <x-ui.input label="Number of people"
-                        placeholder="Tell us how many people are going to our event"
-                    />
-                </div>
-            @endif
-
             @if ($item && $modelItem->availableQuantity() > 1)
-                <div class="col-span-full space-y-2">
-                    <x-ui.input.number label="Quantity"
-                                     wire:model.change="quantity"
-                                     :min="1"
-                                     :max="$modelItem->availableQuantity()"
-                    />
-                    <p class="text-sm font-semibold underline decoration-dotted text-primary">
-                        {{ $modelItem->availableQuantity() }} @lang('available quotas')
-                    </p>
-                </div>
+                <x-ui.input.number label="Quantity"
+                                 wire:model.change="quantity"
+                                 :min="1"
+                                 :max="$modelItem->availableQuantity()"
+                />
+                <p class="text-sm font-semibold underline decoration-dotted text-primary">
+                    {{ $modelItem->availableQuantity() }} @lang('available quotas')
+                </p>
             @endif
             @if ($modelItem && $modelItem->is_quotable)
                 @php($available = $modelItem->availableQuantity())

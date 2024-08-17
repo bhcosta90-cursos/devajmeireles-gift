@@ -16,19 +16,8 @@
                     <x-ui.input.number label="Quantity" min="1" wire:model.change="quantity" />
                 @endif
             </div>
-            <div class="grid grid-cols-2 gap-4">
-                <div @class(['col-span-full'=> !($delivery && $this->isPresence && \App\Enums\DeliveryType::from($delivery) === \App\Enums\DeliveryType::InPerson && blank($signature))])>
-                    <x-ui.select wire:model.live="delivery" :options="$this->getDelivery" label="Tipo de Entrega" />
-                </div>
-                @if($delivery && $this->isPresence && \App\Enums\DeliveryType::from($delivery) === \App\Enums\DeliveryType::InPerson && blank($signature))
-                    <div>
-                        <x-ui.input label="Number of people"
-                                    wire:model="presence"
-                                    placeholder="Number of people going to the event"
-                        />
-                    </div>
-                @endif
-            </div>
+
+            <x-ui.select wire:model.live="delivery" :options="$this->getDelivery" label="Tipo de Entrega" />
 
             <x-ui.textarea max="200" wire:model="observation" label="Observation" />
 
