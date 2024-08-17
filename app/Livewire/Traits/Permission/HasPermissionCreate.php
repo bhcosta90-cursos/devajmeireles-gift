@@ -22,7 +22,7 @@ trait HasPermissionCreate
 
     private function getCreatePermissionName(): string
     {
-        return 'delete';
+        return 'create';
     }
 
     abstract protected function getCreatePermissionParams(): array;

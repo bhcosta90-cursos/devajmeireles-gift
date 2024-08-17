@@ -48,11 +48,6 @@ class Manage extends Component
 
     public ?int $presence = null;
 
-    public function mount(): void
-    {
-        $this->authorize('manage', Signature::class);
-    }
-
     public function render(): View
     {
         return view('livewire.admin.signatures.manage');
@@ -75,7 +70,6 @@ class Manage extends Component
         $this->authorize('edit', $signature);
 
         $this->signature = $signature;
-        $this->authorize('manage', $signature);
 
         $this->modelItem   = $signature->item;
         $this->name        = $signature->name;

@@ -87,7 +87,7 @@ class Signatures extends Component
     #[Computed]
     public function canManage(): bool
     {
-        return auth()->user()->can('manage', Signature::class);
+        return auth()->user()->can('create', Signature::class);
     }
 
     protected function getPermissionName(): string

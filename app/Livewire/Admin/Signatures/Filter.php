@@ -20,7 +20,7 @@ class Filter extends Component
 
     public function mount(): void
     {
-        $this->authorize('manage', Signature::class);
+        $this->authorize('create', Signature::class);
 
         $this->search['items']      = request('search.items', []);
         $this->search['categories'] = request('search.categories', []);

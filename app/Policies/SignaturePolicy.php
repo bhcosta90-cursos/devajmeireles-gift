@@ -11,11 +11,6 @@ class SignaturePolicy
 {
     use HandlesAuthorization;
 
-    public function manage(User $user): bool
-    {
-        return !$user->isGuest();
-    }
-
     public function create(User $user): bool
     {
         return !$user->isGuest();
