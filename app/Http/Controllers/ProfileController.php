@@ -8,6 +8,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Auth;
 use Illuminate\Http\{RedirectResponse, Request};
 use Illuminate\View\View;
+use Redirect;
 
 class ProfileController extends Controller
 {

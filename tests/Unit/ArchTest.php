@@ -12,7 +12,7 @@ arch('globals')
 
 arch('facades')
     ->expect('Illuminate\Support\Facades')
-    ->not->toBeUsed();
+    ->not->toBeUsed()->ignoring('App\Services\Facades');
 
 arch('models')
     ->expect('App\Models')

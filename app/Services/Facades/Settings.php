@@ -6,6 +6,7 @@ namespace App\Services\Facades;
 
 use App\Models\Setting;
 use App\Services\SettingService;
+use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static string|null get(string $key, mixed $default = null)
@@ -13,7 +14,7 @@ use App\Services\SettingService;
  * @method static void forgot(string $key)
  * @see SettingsService
  */
-class Settings
+class Settings extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
