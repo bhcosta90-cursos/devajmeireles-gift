@@ -31,7 +31,7 @@ trait SignatureCreate
     ): array {
         $idPresence = null;
 
-        if ($delivery === DeliveryType::InPerson->value && $presence > 0 && $isPresence = $this->isPresence()) {
+        if ($delivery === DeliveryType::InPerson->value && $presence > 0 && $this->isPresence()) {
             $idPresence = Presence::create([
                 'name'         => $name,
                 'quantity'     => $presence,
